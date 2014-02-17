@@ -1,0 +1,35 @@
+body {
+	margin: 0 auto;
+	width:80%;
+	clear:both;
+}
+
+section {
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+nav {
+	height: 40px;
+}
+
+ul {
+	list-style: none;
+	background-color: yellow;
+
+}
+
+li {
+	text-decoration: none;
+}
+
+li a {
+	text-decoration: none;
+	float: left;
+	margin-right: 2px;
+
+}
+
+h1 {
+	text-align: center;
+}
