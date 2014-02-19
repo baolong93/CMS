@@ -18,32 +18,7 @@ if (isset($_POST['submitted'])) {
 <html>
 <head>
 	<title>CMS Insert page</title>
-	<script>
-		function isset(varname)
-		{
-			return typeof varname != 'undifined'
-		}
-
-		function validateName(field) {
-			if (field == "") return "No Name was entered.\n"
-			return ""
-		}
-		function validatePrice(field) {
-			if (field == "") return "No Price was entered.\n"
-			else if (field.length > 5) 
-				return "Price can not be greater than 100000$"
-			else if (![0-9].test(field))
-				return "Invalid Price"
-			return "" 
-		}
-		function validateDescription(field) {
-			if (field == "") return "No description was entered.\n"
-			else if (field.length > 200)
-				return "description is too long!!.\n"
-			return ""		
-		}
-
-	</script>
+	
 	<script>
 	function validate(form) {
 	 fail = validateName(form.name.value)
@@ -53,15 +28,18 @@ if (isset($_POST['submitted'])) {
 	 	else {alert(fail); return false}
 	}
 	</script>
+	<script src="../script/script.js"></script>
 </head>
 <body>
-		<form method="post" action="insert.php" onSubmit="return validate(this)"><pre>    <!--pre tag for keep the form in fix width-->
+	<h1> Insert Form </h1>
+		<form method="post" action="insert.php" onSubmit="return validate(this)" enctype="multipart/form-data"><pre>    <!--pre tag for keep the form in fix width-->
 			<input type="hidden" name="submitted" value="yes"/>
 			Name:               <input type="text" name="name"/>
 			Number of Product:  <input type="text" name="NoP" value="1"/>
 			Price:              <input type="text" name="price"/>
 			Description:        <textarea name="description" cols="50px" rows="5px" wrap="off">Description
 								</textarea>
+			Image: 				<input type="file" name="filename" size="10" />
 			<input type="submit" value="Add Product"/>
 		</pre></form>
 
