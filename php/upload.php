@@ -2,6 +2,8 @@
 
 
 	//properties of uploaded file
+if ($_FILES)
+{
 	$name = $_FILES['filename']['name'];
 	$type = $_FILES['filename']['type'];
 	$size = $_FILES['filename']['size'];

@@ -18,4 +18,5 @@ function getProducts() {
 		echo "Price: "      			.     $row[3]   	. '<br />';
 		echo "Description: "       		.     $row[4]   	. '<br /><br />';	
 	}
+}
 ?>

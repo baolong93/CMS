@@ -15,9 +15,7 @@ if (isset($_POST['submitted'])) {
 			die('error inserting new record ');
 		} //end of nested statement.
 	$newProduct = "Product has been input sucessfully";
-
 } //end of if statement.
-
 ?>
 
 <html lang="en">
