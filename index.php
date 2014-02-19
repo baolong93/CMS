@@ -26,6 +26,7 @@ if (isset($_POST['submitted'])) {
 </head>
 
 <body>
+	<h1> Insert form</h1>
 		<form method="post" action="index.php"><pre>    <!--pre tag for keep the form in fix width-->
 			<input type="hidden" name="submitted" value="yes"/>
 			Name:               <input type="text" name="name"/>
