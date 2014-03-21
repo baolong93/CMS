@@ -3,8 +3,9 @@ include_once 'connect.php';
 
 	if (isset($_POST['delete']) && isset($_POST['id']))
 	{
-		$id = get_post('id');
-		$query = "DELETE FROM product WHERE id='$id'";
+		$id = $_POST['id'];
+		$query = "DELETE FROM product WHERE ID = '$id'";
+		$delete = mysql_query($query);
 	}
 
 	$query = "SELECT * FROM product";
@@ -24,6 +25,8 @@ include_once 'connect.php';
 		Name:  $row[1]
 		Number of Product:  $row[2]					
 		Price:  $row[3]$
+		Description:  $row[4]
+		Picture: <img src=.$row[5] />
 		</pre>
 
 		<form action="product.php" method="post">
@@ -31,10 +34,5 @@ include_once 'connect.php';
 		<input type="hidden" name="id"    value="$row[0]" />
 		<input type="submit" value="DELETE PRODUCT"	/></form>
 _END;
-	}
-
-	function get_post($var)
-	{
-		return mysql_real_escape_string($_POST($var));
 	}
 ?>

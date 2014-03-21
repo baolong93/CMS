@@ -4,27 +4,73 @@
 <head>
 	<title>CMS</title>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta name="viewpoint" content="width=device-width initial-scale=1.0" /> <!-- Responsive site. -->
 </head>
 
-<body>
-	<div>
-		<head>
+<body class="body">
+	<header class="mainheader">
+		<!-- <head>
 				<h1>CMS For Webscrpt</h1>
-		</head>
+		</head> -->
 
 		<nav><ul>
-				<li><a href="#">home</a></li>
-				<li><a href="#">contact</a></li>
-				<li><a href="#">product</a></li>
+				<li><a href="#" class="active">Home</a></li>
+				<li><a href="#">Product</a></li>
+				<li><a href="#">Contact</a></li>
 		</ul></nav>
+	</header>
 
-		<section>
-				<img src="banner">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend augue ac ligula consequat, malesuada placerat tellus tincidunt. Ut ut faucibus nunc. Nulla rutrum mattis massa sed aliquet. Sed lacinia mattis sem, in dignissim urna commodo a. Vestibulum at porttitor tellus, ac ultrices mauris. Nunc ultrices venenatis egestas. Quisque accumsan nulla ipsum, eu auctor eros sollicitudin ut. Sed consequat metus a fermentum sollicitudin. Pellentesque ullamcorper, diam sit amet pulvinar congue, libero justo ultrices est, at convallis tellus massa eleifend urna. Aenean non turpis odio. Ut placerat ligula id dui sodales dictum. Pellentesque nec sem ante. Nulla a pretium tortor, non ultricies sem. Sed auctor, eros et laoreet tempus, sapien urna eleifend magna, at rutrum nisi libero eu ante. Proin eu vehicula enim. Curabitur a quam molestie, laoreet sapien eget, ultricies elit.</a>
-		</section>
+	<div class="maincontent">
+		<div class="content">
+			<article class="topcontent">
+				<header>
+					<h2><a href="#" title="First Post">First post</a></h2>
+				</header>
+
+				<footer>
+					<p class="post_info">This is post written by Long</p>
+				</footer>	
+
+				<content>
+					<p>dsafdsafdaf<p>
+				</content>
+			</article>
+
+			<article class="bottomcontent">
+				<header>
+					<h2><a href="#" title="Second Post">Second post</a></h2>
+				</header>
+
+				<footer>
+					<p class="post_info">This is post written by Long</p>
+				</footer>	
+
+				<content>
+					<p>dsafdsafdaf<p>
+				</content>
+			</article>
+
+		</div>
 	</div>
 
-</body>
+	<aside class="top_sidebar">
+		<article>
+			<h2>Top side bar</h2>
+			<p>dsafdsafdsfdsa</p>
+		</article>
+	</aside>
 
+	<aside class="bottom_sidebar">
+		<article>
+			<h2>bottom side bar</h2>
+			<p>dsafdsafdsfdsa</p>
+		</article>
+	</aside>
+
+	<footer class="main_footer">
+		<p>Copyright &copy: <a href="#" title="Bao Long Ngo">Ngo Bao Long</a></p>
+	</footer>
+
+</body>
 </html>

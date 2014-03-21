@@ -36,7 +36,7 @@ $query = "CREATE TABLE Product(ID INT NOT NULL AUTO_INCREMENT,
           NumberofProduct INT(5) NOT NULL,
           Description VARCHAR(200) NOT NULL,
           Picture VARCHAR(20), 
-          PRIMARY KEY (user_id));";
+          PRIMARY KEY (ID));";
 // Execute query
 if (mysql_query($query))
   {

@@ -1,20 +1,31 @@
 <?php
+echo <<<_END
+<html>
+<head>
+	<title>Image Uploading</title>
+</head>
+<body>
+<form method="post" action="upload.php" enctype="multipart/form-data">
+Select File: <input type='file' name='filename' size='10' />
+<input type='submit' value='Upload' />
+</form>
+_END;
 
-
-	//properties of uploaded file
 if ($_FILES)
 {
 	$name = $_FILES['filename']['name'];
-	$type = $_FILES['filename']['type'];
+	$temp = $_FILES['filename']['tmp_name'];
 	$size = $_FILES['filename']['size'];
-	echo  $_FILES['filename']['tmp_file'];
-	$error = $_FILES['filename']['error'];
+	$query = "INSERT INTO Product VALUES $name;";
+	move_uploaded_file($temp,"picture/".$name);
+	$image = "picture/".$name;
+	echo "Uploaded image '$name' <br /><img src=$image />";
+}
 
-// if ($error > 0)
-// 	die("Error uploading file! Code $error.");
-// else {
-// 	move_uploaded_file($temp, $name);
-// 	echo "upload complete '$name'<br /><img src='$name' />";
-// }
+echo "</body></html>";
 
+
+
+
+// Need function to check picture existance
 ?>
