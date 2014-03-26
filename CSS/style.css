@@ -1,10 +1,17 @@
 body { /*same for every site*/
+	background-color: lightgrey;
 	color: #000305;
 	font-size: 87.5%; /* based font size is 14px, responsive */ 
 	font-family: Arial, "Lucida Sans Unicode";
 	line-height: 1.5;
 	text-align: left; 
 }
+
+h1 {
+	float: center;
+	text-transform: uppercase;
+	color: #CF5C3F;
+}	
 
 a {
 	text-decoration: none;
@@ -88,17 +95,21 @@ a:hover, a:active {
 }
 
 .top_sidebar {
-	width: 27%;
+	width: 23%;
 	float: right;
 	background-color: #fff;
-	margin: 2% 0 2% 3%;
+	margin: 1.5% 0 2% 3%;
+	padding: 2% 2%;
+	border-radius: 5px;
 }
 
 .bottom_sidebar {
-	width: 27%;
+	width: 23%;
 	float: right;
 	background-color: #fff;
 	margin: 2% 0 2% 3%;
+	padding: 2% 2%;
+	border-radius: 5px;
 }
 
 .post_info {
@@ -157,12 +168,8 @@ a:hover, a:active {
 	}
 
 	.top_sidebar {
-	width: 100%;
+	width: 96%;
 	margin: 2% 0 2% 0%;
 	}	
 
-	.bottom_sidebar {
-	width: 100%;
-	margin: 2% 0 2% 0%;
-	}
 }

@@ -1,5 +1,5 @@
 <?php
-include('create_db.php');
+include('connect.php');
 
 if (isset($_POST['submitted'])) {
 
@@ -9,8 +9,8 @@ if (isset($_POST['submitted'])) {
 		$temp = $_FILES['filename']['tmp_name'];
 		$size = $_FILES['filename']['size'];
 		// $query = "INSERT INTO Product VALUES $name;";
-		move_uploaded_file($temp, "picture/".$name);
 		$image = "picture/".$name;
+		move_uploaded_file($temp, $image);
 		// echo "Uploaded image '$name' <br /><img src=$image />";
 	}
 	
@@ -20,8 +20,9 @@ if (isset($_POST['submitted'])) {
 		$description 			= $_POST['description'];
 		$sql					="INSERT INTO Product (ID, Name, numberOfProduct, Price, Description, Picture) 
 												VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
-		if (!mysql_query($sql, $connection)) {
-			die('error inserting new record ');
+		$results = $mysqli->query($sql);
+		if (!$results) {
+			die('error inserting new product!');
 		} //end of nested statement.
 } //end of if statement.
 ?>
@@ -29,36 +30,6 @@ if (isset($_POST['submitted'])) {
 <html>
 <head>
 	<title>CMS Insert page</title>
-	
-	<script>
-	function validate(form) {
-	 fail = validateName(form.name.value)
-	 fail += validatePrice(form.price.value)
-	 fail += validateDescription(form.description.value)
-	 if (fail = "") return true
-	 	else {alert(fail); return false}
-	}
-	</script>
-	<script>
-		function validateName(field) {
-		if (field == "") return "No Name was entered.\n"
-		return ""
-		}
-		function validatePrice(field) {
-			if (field == "") return "No Price was entered.\n"
-			else if (field.length > 5) 
-				return "Price can not be greater than 100000$"
-			else if (![0-9].test(field))
-				return "Invalid Price"
-			return "" 
-		}
-		function validateDescription(field) {
-			if (field == "") return "No description was entered.\n"
-			else if (field.length > 200)
-				return "description is too long!!.\n"
-			return ""
-		}
-</script>
 </head>
 <body>
 	<table class="input" border="0" cellpadding="2"
@@ -77,3 +48,36 @@ if (isset($_POST['submitted'])) {
 
 </body>
 </html>
+
+
+
+
+ <script>
+	function validate(form) {
+	 fail = validateName(form.name.value)
+	 fail += validatePrice(form.price.value)
+	 fail += validateDescription(form.description.value)
+	 if (fail = "") return true
+	 	else {alert(fail); return false}
+	}
+ 	</script>
+ 	<script>
+		function validateName(field) {
+		if (field == "") return "No Name was entered.\n"
+		return ""
+		}
+		function validatePrice(field) {
+			if (field == "") return "No Price was entered.\n"
+			else if (field.length > 5) 
+				return "Price can not be greater than 100000$"
+			else if (![0-9].test(field))
+				return "Invalid Price"
+			return "" 
+		}
+		function validateDescription(field) {
+			if (field == "") return "No description was entered.\n"
+			else if (field.length > 200)
+				return "description is too long!!.\n"
+			return ""
+		}
+ </script>

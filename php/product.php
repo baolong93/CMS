@@ -26,7 +26,7 @@ include_once 'connect.php';
 		Number of Product:  $row[2]					
 		Price:  $row[3]$
 		Description:  $row[4]
-		Picture: <img src=.$row[5] />
+		Picture: <img src='$row[5]'>   
 		</pre>
 
 		<form action="product.php" method="post">
