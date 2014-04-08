@@ -6,7 +6,7 @@ include_once("php/connect.php");
 if(isset($_GET["emptycart"]) && $_GET["emptycart"]==1)
 {
 	$return_url = base64_decode($_GET["return_url"]); //return url
-	session_destroy();
+	session_destroy(); //finish session clear all the product.
 	header('Location:'.$return_url); //redirect the page.
 }
 
@@ -37,7 +37,7 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 			
 			foreach ($_SESSION["products"] as $cart_itm) //loop through session array
 			{
-				if($cart_itm["code"] == $product_code){ //the item exist in array
+				if($cart_itm["code"] == $product_ID){ //the item exist in array
        				$product_qty += $cart_itm['qty']; //increase number of product in the cart
 					$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$product_qty, 'price'=>$cart_itm["price"]);
 					$found = true;
