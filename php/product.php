@@ -35,13 +35,13 @@ include_once 'connect.php'; //connect to the database
 		Picture: <img src='$row[5]'>   
 		</pre>
 
-		<form action="product.php" method="post">
+		<form action="product.php" method="post" onSubmit="return confirmDelete()")">
 		<input type="hidden" name="delete" value="yes"/>
 		<input type="hidden" name="id"    value="$row[0]" />
 		<input type="submit" name="delete" value="DELETE PRODUCT"	/>
 		</form>
 
-		<form action="edit.php?id=$row[0]" method="post">
+		<form action="edit.php?id=$row[0]" method="post">  
 		<input type="hidden" name="id" value="$row[0]" />
 		<input type="submit" name="edit" value="EDIT PRODUCT" />
 		</form>
@@ -51,3 +51,10 @@ _END;
 <?php
 	include('footer.php'); //footer of the page
 ?>
+
+<script>
+	function confirmDelete() {
+		var x = confirm("Are you sure you want to delete this product.");
+		return x;
+	}
+</script>
