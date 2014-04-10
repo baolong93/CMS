@@ -1,4 +1,16 @@
-
+// function confirmDelete() {
+// 	var x;
+// 	var r=confirm("Press a button!");
+// 	if (r==true)
+// 	  {
+// 	  x="You pressed OK!";
+// 	  }
+// 	else
+// 	  {
+// 	  x="You pressed Cancel!";
+// 	  }
+// 	document.getElementById("demo").innerHTML=x;
+// }
 // function isset(varname)
 // {
 // 	return typeof varname != 'undifined'

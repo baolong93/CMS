@@ -32,25 +32,25 @@ if (isset($_POST['submitted'])) {
 <?php
 	include('header.php');
 ?>
+
 <body>
-	<table class="input" border="0" cellpadding="2"
-		cellspacing="5" bgcolor="#eeeee">
-	<th colspan="2" align="center">Input Product</th>
-		<form method="post" action="insert.php" enctype="multipart/form-data"onSubmit="return validate(this)"  ><pre>    <!--pre tag for keep the form in fix width-->
+<h2>Insert New Product</h2>
+		<form method="post" action="insert.php" enctype="multipart/form-data" onSubmit="return validate(this)"><pre>    <!--pre tag for keep the form in fix width-->
 			<input type="hidden" name="submitted" value="yes"/>
-			<tr><td>Name:</td><td><input type="text" name="proName"/></td></tr>
-			<tr><td>Number of Product:</td><td><input type="text" name="NoP" value="1"/></td></tr>
-			<tr><td>Price:</td><td><input type="text" name="price"/></td></tr>
-			<tr><td>Description:</td><td><textarea name="desc" cols="50px" rows="5px" wrap="off">Description</textarea></td></tr>
-			<tr><td>Image:</td><td><input type="file" name="filename" size="10" /></td></tr>
-			<tr><td colspan="2" align="center">
-			<input type="submit" value="Add Product"/></td></tr>
-	</pre></form></table>
+			Name:             <input type="text" name="proName"/>
+			Number of Product:<input type="text" name="NoP" value="1"/>
+			Price:            <input type="text" name="price"/>
+			Description:      <textarea name="desc" cols="50px" rows="5px" wrap="off">Description</textarea>
+			Image:            <input type="file" name="filename" size="10" />
+			<input type="submit" value="Add Product"/>
+	</pre></form>
 
 </body>
+
 <?php
 	include('footer.php');
 ?>
+
  <script>
 	function validate(form) {
 	 fail = validateName(form.proName.value)
