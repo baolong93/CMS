@@ -10,7 +10,7 @@ include_once 'connect.php'; //connect to the database
 		$query = "DELETE FROM product WHERE ID = '$id'"; 
 		//back for delete the picture file.
 		$delete = $mysqli->query($query);
-		$deleteImage = unlink($_POST['image']); //delete product image.
+		// $deleteImage = unlink($_POST['image']); //delete product image.
 	}
 
 

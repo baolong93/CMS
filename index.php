@@ -3,20 +3,37 @@
 	include_once "php/connect.php"; //prevent from loading the file multiple times.
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<meta charset="utf-8">
-	<title>Category and shopping cart</title>
+	<title>CMS</title>
+	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<meta name="viewpoint" content="width=device-width initial-scale=1.0" /> <!-- Responsive site. -->
+	<script src="script/script.js">
+</script>
 </head>
+
 <body class="body">
-	<header>
-		<div class="maincontent">
+	<header class="mainheader">
+				<h1 class="logo">CMS For Webscrpt</h1>
+
+		<nav><ul>
+				<li><a href="index.php" class="active" id = "homeButton">Home</a></li>
+				<li><a href="php/product.php" id = "productButton">Product</a></li>
+				<li><a href="php/insert.php" id="insertButton">Insert Product</a></li>
+				<li><a href="#" id ="contactButton">Contact</a></li>
+		</ul></nav>
+	</header>
+
+	<div id='cart'></div>
+	<div class="maincontent">
 		<div class="content">
+			<article class="topcontent">
 			<?php
 		    //current URL of the Page. cart_update.php redirects back to this URL
+		    $_SESSION["current_url"] = base64_encode($_SERVER['REQUEST_URI']);
 			$current_url = base64_encode($_SERVER['REQUEST_URI']);
-    ;
 		    
 			$results = $mysqli->query("SELECT * FROM Product ORDER BY id ASC");
 		    if ($results) { 
@@ -32,7 +49,7 @@
 		            echo '<div class="product-info">';
 					echo 'Price '.$currency.$obj->Price.' | ';
 		            echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
-					echo '<button class="add_to_cart">Add To Cart</button>';
+					echo '<button class="add_to_cart" onclick="fetch()">Add To Cart</button>';
 					echo '</div></div>';
 		            echo '<input type="hidden" name="product_ID" value="'.$obj->ID.'" />';
 		            echo '<input type="hidden" name="type" value="add" />';
@@ -43,8 +60,25 @@
     
 		    }
 		    ?>
+
+			</article>
+
+			<article class="bottomcontent">
+				<header>
+					<h2><a href="#" title="Second Post">Second product</a></h2>
+				</header>
+
+				<footer>
+					<p class="post_info">Price $0.00</p>
+				</footer>	
+
+				<content>
+					<p>dsafdsafdaf<p>
+				</content>
+			</article>
+
 		</div>
-	</div>
+
 
 	<aside class="top_sidebar">
 		<article>
@@ -76,6 +110,13 @@
 			?>
 		</article>
 	</aside>
-	</header>
+</div>
+
+<div id="mainpage"></div>
+
+	<footer class="main_footer">
+		<p>Copyright &copy: <a href="#" title="Bao Long Ngo">Ngo Bao Long</a></p>
+	</footer>
+
 </body>
 </html>

@@ -24,18 +24,24 @@
 
 <?php
 	if(isset($_POST['submitted'])){
-		$name = $_FILES['filename']['name'];
-		$temp = $_FILES['filename']['tmp_name'];
-		$size = $_FILES['filename']['size'];
-		// $query = "INSERT INTO Product VALUES $name;";
-
-		$image = "picture/".$name;
-		move_uploaded_file($temp, $image);
-
-		$update = "UPDATE Product SET `Name`='$_POST[proName]',  `Description`='$_POST[desc]', `NumberofProduct` = '$_POST[NoP]', `Price` = '$_POST[price]', `Picture` = '$image' WHERE ID = $_POST[id]";
+		
+		$update = "UPDATE Product SET Name ='$_POST[proName]',  
+									  Description ='$_POST[desc]', 
+									  NumberofProduct = '$_POST[NoP]', 
+									  Price = '$_POST[price]' 
+			       WHERE ID = $_POST[id]";
 		$mysqli->query($update);
+ 
+		if ($_FILES['filename']['name']!=""){   //check is new image has been put.
+			$image = "picture/".$_FILES['filename']['name'];
+			$temp = $_FILES['filename']['tmp_name'];
+		// $query = "INSERT INTO Product VALUES $name;";
+		move_uploaded_file($temp, $image);
+			$updatePicture = "UPDATE Product SET Picture='$image' WHERE ID = $_POST[id]";
+			$mysqli->query($updatePicture);
+		}
 
 		echo "all done";
-		header("Location: ../index.php");
+		header("Location: product.php");
 	}
 ?>

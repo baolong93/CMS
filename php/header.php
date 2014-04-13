@@ -14,7 +14,7 @@
 				<h1 class="logo">CMS For Webscrpt</h1>
 
 		<nav><ul>
-				<li><a href="../index.html" class="active" id = "homeButton">Home</a></li>
+				<li><a href="../index.php" class="active" id = "homeButton">Home</a></li>
 				<li><a href="product.php" id = "productButton">Product</a></li>
 				<li><a href="insert.php" id="insertButton">Insert Product</a></li>
 				<li><a href="#" id ="contactButton">Contact</a></li>

@@ -13,7 +13,7 @@ include_once("php/connect.php");
  <h1>View Cart</h1>
  <div class="view-cart">
  	<?php
-    $current_url = base64_encode('localhost/cms/'.$_SERVER['REQUEST_URI']);
+    $current_url = base64_encode($_SERVER['REQUEST_URI']);
 	if(isset($_SESSION["products"]))
     {
 	    $total = 0;
@@ -23,7 +23,7 @@ include_once("php/connect.php");
 		foreach ($_SESSION["products"] as $cart_itm)
         {
            $product_code = $cart_itm["code"];
-		   $results = $mysqli->query("SELECT Name,Description, Price FROM Product WHERE ID='$product_ID' LIMIT 1");
+		   $results = $mysqli->query("SELECT Name,Description, Price FROM Product WHERE ID='$product_code' LIMIT 1");
 		   $obj = $results->fetch_object();
 		   
 		    echo '<li class="cart-itm">';
@@ -47,6 +47,7 @@ include_once("php/connect.php");
         }
     	echo '</ul>';
 		echo '<span class="check-out-txt">';
+		echo '<span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
 		echo '<strong>Total : '.$currency.$total.'</strong>  ';
 		echo '</span>';
 		echo '</form>';

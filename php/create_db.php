@@ -46,6 +46,67 @@ if ($mysqli->query($query))
   }
 }
 
+// initialize product.
+$productname = "Bag";
+$description = "Endeavor bachelor but add eat pleasure doubtful sociable. Earnest greater on no observe for";
+$price = "15";
+$numberOfProduct = "14";
+$image = "picture/bag.jpeg";
+$query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
+$length = mysqli_num_rows($mysqli->query($query));
+if ( $length == 0){
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
+                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+  if ($mysqli->query($sql))
+    {
+      ECHO "CREATE A PRODUCT successfully;";
+    }
+  else
+    {
+      echo "Something went wrong!";
+    }
+}
 
+$productname = "MacBook";
+$description = "Endeavor bachelor but add eat pleasure doubtful sociable. Earnest greater on no observe for";
+$price = "15";
+$numberOfProduct = "14";
+$image = "picture/macbook.jpeg";
+$query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
+$length = mysqli_num_rows($mysqli->query($query));
+if ( $length == 0){
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
+                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+  if ($mysqli->query($sql))
+    {
+      ECHO "CREATE A PRODUCT successfully;";
+    }
+  else
+    {
+      echo "Something went wrong!";
+    }
+}
+
+$productname = "noimage";
+$description = "Endeavor bachelor but add eat pleasure doubtful sociable. Earnest greater on no observe for";
+$price = "15";
+$numberOfProduct = "14";
+$image = "picture/noimage.jpeg";
+$query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
+$length = mysqli_num_rows($mysqli->query($query));
+if ( $length == 0){
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
+                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+  if ($mysqli->query($sql))
+    {
+      ECHO "CREATE A PRODUCT successfully;";
+    }
+  else
+    {
+      echo "Something went wrong!";
+    }
+}
+
+Echo "All set";
 
 ?>
