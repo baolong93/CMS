@@ -22,6 +22,8 @@
 			<input type="submit"  name="submit" value="Modify" />
 	</pre></form>
 
+<div id='cart'></div>
+
 <?php
 	if(isset($_POST['submitted'])){
 		

@@ -1,6 +1,7 @@
 
 
 <?php
+/// Need to complete the validation.
 include('connect.php');
 
 if (isset($_POST['submitted'])) {
@@ -21,7 +22,7 @@ if (isset($_POST['submitted'])) {
 		$price 					= $_POST['price'];
 		$description 			= $_POST['desc'];
 		$sql					="INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
-												VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+								VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
 		$results = $mysqli->query($sql);
 		if (!$results) {
 			die('error inserting new product!');

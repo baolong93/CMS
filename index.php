@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	session_start(); // start session cookies.
 	include_once "php/connect.php"; //prevent from loading the file multiple times.
 ?>
 <!DOCTYPE html>
@@ -23,35 +23,38 @@
 				<li><a href="php/product.php" id = "productButton">Product</a></li>
 				<li><a href="php/insert.php" id="insertButton">Insert Product</a></li>
 				<li><a href="#" id ="contactButton">Contact</a></li>
+				<li id='cart'>Cart</li>
 		</ul></nav>
 	</header>
 
-	<div id='cart'></div>
+	<!-- <div id='cart'></div> -->
 	<div class="maincontent">
 		<div class="content">
 			<article class="topcontent">
 			<?php
 		    //current URL of the Page. cart_update.php redirects back to this URL
-		    $_SESSION["current_url"] = base64_encode($_SERVER['REQUEST_URI']);
-			$current_url = base64_encode($_SERVER['REQUEST_URI']);
 		    
+			$current_url = base64_encode($_SERVER['REQUEST_URI']);
+			$_SESSION["current_url"] = $current_url;
+		    
+		    //query for get product from the database.
 			$results = $mysqli->query("SELECT * FROM Product ORDER BY id ASC");
 		    if ($results) { 
 			
 		        //fetch results set as object and output HTML
-		        while($obj = $results->fetch_object())
+		        while($prob = $results->fetch_object())
 		        {
-					echo '<div class="topcontent">'; 
+					echo '<div class="product">'; 
 		            echo '<form method="post" action="cart_update.php">';
-					echo '<div class="product-picture"><img src="php/'.$obj->Picture.'"></div>';
-		            echo '<div class="Name"><h3>'.$obj->Name.'</h3>';
-		            echo '<div class="Description">'.$obj->Description.'</div>';
+					echo '<div class="proPicture"><a href="php/product_display.php?id='.$prob->ID.'"><img src="php/'.$prob->Picture.'"></a></div>';
+		            echo '<div class="Name"><h3>'.$prob->Name.'</h3>';
+		            // echo '<div class="Description">'.$prob->Description.'</div>';
 		            echo '<div class="product-info">';
-					echo 'Price '.$currency.$obj->Price.' | ';
+					echo 'Price £'.$prob->Price.' | ';
 		            echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
 					echo '<button class="add_to_cart" onclick="fetch()">Add To Cart</button>';
 					echo '</div></div>';
-		            echo '<input type="hidden" name="product_ID" value="'.$obj->ID.'" />';
+		            echo '<input type="hidden" name="product_ID" value="'.$prob->ID.'" />';
 		            echo '<input type="hidden" name="type" value="add" />';
 					echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
 		            echo '</form>';

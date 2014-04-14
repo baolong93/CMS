@@ -1,7 +1,8 @@
-xmlRequest = function(url, target, vars)
+request = function(link, target, result)
 {
+	var changeListener;
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function()
+    changeListener = function()
     	{
         	if(xhr.readyState === 4)
 					{
@@ -19,25 +20,26 @@ xmlRequest = function(url, target, vars)
 		    			target.innerHTML = "<p>Hold Up...</p>";
 		    		}
 		}; 
-    xhr.open("POST", url, true);
-    xhr.send(vars);
-}
+    xhr.open("GET", link, true);
+    xhr.onreadystatechange = changeListener;
+    xhr.send(result);
+};
 
-changeHomepage = function()
+changeCart = function()
 	{
 		var target;
 		target = document.getElementById("cart");
-		xmlRequest("php/shoppingCart/cart_display.php", target);
-	}
+		request("php/shoppingCart/cart_display.php", target);
+	};
 
 pageLoaded = function() 
 	{
-		var homepage = document.getElementById("add_to_cart");
-		if(homepage)
+		var cart = document.getElementById("add_to_cart");
+		if(cart)
 			{
-				homepage.addEventListener("click", changeHomepage);
+				cart.addEventListener("click", changeHomepage);
 			}
-		changeHomepage();
-	}
+		changeCart();
+	};
 
 window.onload = pageLoaded;
