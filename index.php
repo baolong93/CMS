@@ -23,17 +23,17 @@
 				<li><a href="php/product.php" id = "productButton">Product</a></li>
 				<li><a href="php/insert.php" id="insertButton">Insert Product</a></li>
 				<li><a href="#" id ="contactButton">Contact</a></li>
-				<li id='cart'>Cart</li>
+				<li><a href="php/shoppingCart/view_cart.php">Cart </a></li>
+				<div id='cart'></div>
 		</ul></nav>
 	</header>
 
 	<!-- <div id='cart'></div> -->
 	<div class="maincontent">
-		<div class="content">
+		<div class="content" id="item">
 			<article class="topcontent">
 			<?php
 		    //current URL of the Page. cart_update.php redirects back to this URL
-		    
 			$current_url = base64_encode($_SERVER['REQUEST_URI']);
 			$_SESSION["current_url"] = $current_url;
 		    
@@ -42,17 +42,19 @@
 		    if ($results) { 
 			
 		        //fetch results set as object and output HTML
-		        while($prob = $results->fetch_object())
+		        while($prob = $results->fetch_object() )
+		        if ( $prob->Active == 1)
+		        {
 		        {
 					echo '<div class="product">'; 
-		            echo '<form method="post" action="cart_update.php">';
-					echo '<div class="proPicture"><a href="php/product_display.php?id='.$prob->ID.'"><img src="php/'.$prob->Picture.'"></a></div>';
+		            echo '<form method="post" action="php/shoppingCart/cart_update.php">';
+					echo '<div class="proPicture><a href="#" onclick ="changeProductView('. $prob->ID. ')"><img src="php/'.$prob->Picture.'"></a></div>';
 		            echo '<div class="Name"><h3>'.$prob->Name.'</h3>';
 		            // echo '<div class="Description">'.$prob->Description.'</div>';
 		            echo '<div class="product-info">';
 					echo 'Price £'.$prob->Price.' | ';
 		            echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
-					echo '<button class="add_to_cart" onclick="fetch()">Add To Cart</button>';
+					echo '<button class="add_to_cart">Add To Cart</button>';
 					echo '</div></div>';
 		            echo '<input type="hidden" name="product_ID" value="'.$prob->ID.'" />';
 		            echo '<input type="hidden" name="type" value="add" />';
@@ -60,13 +62,14 @@
 		            echo '</form>';
 		            echo '</div>';
 		        }
+		    	}
     
 		    }
 		    ?>
 
 			</article>
 
-			<article class="bottomcontent">
+			<!-- <article class="bottomcontent">
 				<header>
 					<h2><a href="#" title="Second Post">Second product</a></h2>
 				</header>
@@ -79,7 +82,7 @@
 					<p>dsafdsafdaf<p>
 				</content>
 			</article>
-
+ -->
 		</div>
 
 
@@ -94,7 +97,7 @@
 			    foreach ($_SESSION["products"] as $cart_itm)
 			    {
 			        echo '<li class="cart-itm">';
-			        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
+			        echo '<span class="remove-itm"><a href="php/shoppingCart/cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
 			        echo '<h3>'.$cart_itm["name"].'</h3>';
 			        echo '<div class="p-code">P code : '.$cart_itm["code"].'</div>';
 			        echo '<div class="p-qty">Qty : '.$cart_itm["qty"].'</div>';
@@ -104,8 +107,8 @@
 			        $total = ($total + $subtotal);
 			    }
 			    echo '</ol>';
-			    echo '<span class="check-out-txt"><strong>Total : '.$currency.$total.'</strong> <a href="view_cart.php">Check-out!</a></span>';
-				echo '<span class="empty-cart"><a href="cart_update.php?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
+			    echo '<span class="check-out-txt"><strong>Total : '.$currency.$total.'</strong> <a href="php/shoppingCart/view_cart.php">Check-out!</a></span>';
+				echo '<span class="empty-cart"><a href="php/shoppingCart/cart_update.php?emptycart=1&return_url='.$current_url.'">Empty Cart</a></span>';
 			     //passing variable "emptycart=1" and return_url to the car_update.php file.
 			}else{
 			    echo 'Your Cart is empty';

@@ -1,8 +1,8 @@
-<?php
+	<?php
 session_start();
-include_once("php/connect.php");
+include_once("../connect.php");
 
-//empty cart by distroying current session
+//If the emptycart is pushed, the session is 
 if(isset($_GET["emptycart"]) && $_GET["emptycart"]==1)
 {
 	$return_url = base64_decode($_GET["return_url"]); //return url
@@ -16,15 +16,14 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 	$product_ID 	= filter_var($_POST["product_ID"], FILTER_SANITIZE_NUMBER_INT); //product code
 	$product_qty 	= filter_var($_POST["product_qty"], FILTER_SANITIZE_NUMBER_INT); //product code
 	$return_url 	= base64_decode($_POST["return_url"]); //return url
-	
-	//limit quantity for single product
-	if($product_qty > 10){
-		die('<div align="center">This demo does not allowed more than 10 quantity!<br /><a href="index.php">Back To Products</a>.</div>');
-	}
 
 	//MySqli query - get details of item from db using product code
-	$results = $mysqli->query("SELECT Name,Price FROM Product WHERE ID='$product_ID' LIMIT 1");
+	$results = $mysqli->query("SELECT Name,Price,NumberofProduct FROM Product WHERE ID='$product_ID' LIMIT 1");
 	$obj = $results->fetch_object();
+
+	if($product_qty > $obj->NumberofProduct){ //Checking whether the stock is available for order.
+		die('<div align="center">The quantity is surpass the stock!<br /><a href="../../index.php">Back To Homepage</a>.</div>');
+	}
 	
 	if ($results) { //we have the product info 
 		
@@ -35,15 +34,18 @@ if(isset($_POST["type"]) && $_POST["type"]=='add')
 		{
 			$found = false; //set found item to false
 			
-			foreach ($_SESSION["products"] as $cart_itm) //loop through session array
+			foreach ($_SESSION["products"] as $item) //Check every single item in the cart.
 			{
-				if($cart_itm["code"] == $product_ID){ //the item exist in array
-       				$product_qty += $cart_itm['qty']; //increase number of product in the cart
-					$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$product_qty, 'price'=>$cart_itm["price"]);
+				if($item["code"] == $product_ID){ 
+       				$product_qty += $item['qty']; //increase number of product in the cart
+       				if ($product_qty > $obj->NumberofProduct) {
+       					die('<div align="center">The quantity is surpass the stock!<br /><a href="../../index.php">Back To Homepage</a>.</div>');
+       				} //Again to check the order compare to what the company hv in stock.
+					$product[] = array('name'=>$item["name"], 'code'=>$item["code"], 'qty'=>$product_qty, 'price'=>$item["price"]);
 					$found = true;
 				}else{
 					//item doesn't exist in the list, just retrive old info and prepare array for session var
-					$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$cart_itm["qty"], 'price'=>$cart_itm["price"]);
+					$product[] = array('name'=>$item["name"], 'code'=>$item["code"], 'qty'=>$item["qty"], 'price'=>$item["price"]);
 				}
 			}
 			
@@ -74,10 +76,10 @@ if(isset($_GET["removep"]) && isset($_GET["return_url"]) && isset($_SESSION["pro
 	$return_url 	= base64_decode($_GET["return_url"]); //get return url
 
 	
-	foreach ($_SESSION["products"] as $cart_itm) //loop through session array var
+	foreach ($_SESSION["products"] as $item) //loop through session array var
 	{
-		if($cart_itm["code"]!=$product_code){ //item does,t exist in the list
-			$product[] = array('name'=>$cart_itm["name"], 'code'=>$cart_itm["code"], 'qty'=>$cart_itm["qty"], 'price'=>$cart_itm["price"]);
+		if($item["code"]!=$product_code){ //item does,t exist in the list
+			$product[] = array('name'=>$item["name"], 'code'=>$item["code"], 'qty'=>$item["qty"], 'price'=>$item["price"]);
 		}
 		
 		//create a new product list for cart

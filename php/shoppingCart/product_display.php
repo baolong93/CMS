@@ -1,23 +1,23 @@
 <?php
 	session_start();
-	include_once("connect.php");
+	include_once("../connect.php");
 	// $current_url = $_SESSION['current_url'];
 	$current_url = base64_encode($_SERVER['REQUEST_URI']);
 	if (isset($_GET['id'])) {
 		$query = "SELECT * FROM Product WHERE ID = $_GET[id]";
 		$result = $mysqli->query($query);
-		$product = $result->fetch_object();
-					echo '<div class="product">'; 
-		            echo '<form method="post" action="../cart_update.php">';
-					echo '<div class="proPicture"><img src="'.$product->Picture.'"></div>';
-		            echo '<div class="Name"><h3>'.$product->Name.'</h3>';
-		            echo '<div class="Description">'.$product->Description.'</div>';
+		$items = $result->fetch_object();
+					echo '<div class="items">'; 
+		            echo '<form method="post" action="php/shoppingCart/cart_update.php">';
+					echo '<div class="proPicture"><img src="php/'.$items->Picture.'"></div>';
+		            echo '<div class="Name"><h3>'.$items->Name.'</h3>';
+		            echo '<div class="Description">'.$items->Description.'</div>';
 		            echo '<div class="product-info">';
-					echo 'Price £'.$product->Price.' | ';
+					echo 'Price £'.$items->Price.' | ';
 		            echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
-					echo '<button class="add_to_cart" onclick="fetch()">Add To Cart</button>';
+					echo '<button class="add_to_cart" ">Add To Cart</button>';
 					echo '</div></div>';
-		            echo '<input type="hidden" name="product_ID" value="'.$product->ID.'" />';
+		            echo '<input type="hidden" name="product_ID" value="'.$items->ID.'" />';
 		            echo '<input type="hidden" name="type" value="add" />';
 					echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
 		            echo '</form>';
@@ -32,16 +32,16 @@
 			{
 			    $total = 0;
 			    echo '<ol>';
-			    foreach ($_SESSION["products"] as $cart_itm)
+			    foreach ($_SESSION["products"] as $item)
 			    {
 			        echo '<li class="cart-itm">';
-			        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$cart_itm["code"].'&return_url='.$current_url.'">&times;</a></span>';
-			        echo '<h3>'.$cart_itm["name"].'</h3>';
-			        echo '<div class="p-code">P code : '.$cart_itm["code"].'</div>';
-			        echo '<div class="p-qty">Qty : '.$cart_itm["qty"].'</div>';
-			        echo '<div class="p-price">Price :'.$currency.$cart_itm["price"].'</div>';
+			        echo '<span class="remove-itm"><a href="cart_update.php?removep='.$item["code"].'&return_url='.$current_url.'">&times;</a></span>';
+			        echo '<h3>'.$item["name"].'</h3>';
+			        echo '<div class="p-code">P code : '.$item["code"].'</div>';
+			        echo '<div class="p-qty">Qty : '.$item["qty"].'</div>';
+			        echo '<div class="p-price">Price :'.$currency.$item["price"].'</div>';
 			        echo '</li>';
-			        $subtotal = ($cart_itm["price"]*$cart_itm["qty"]);
+			        $subtotal = ($item["price"]*$item["qty"]);
 			        $total = ($total + $subtotal);
 			    }
 			    echo '</ol>';

@@ -1,4 +1,6 @@
-
+<?php 
+	session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +21,6 @@
 				<li><a href="product.php" id = "productButton">Product</a></li>
 				<li><a href="insert.php" id="insertButton">Insert Product</a></li>
 				<li><a href="#" id ="contactButton">Contact</a></li>
-				<!-- <li><a href="php/shoppingCart/view_cart.php">Cart <div id='cart'></div></a></li> -->
+				<li><a href="php/shoppingCart/view_cart.php">Cart <div id='cart'></div></a></li>
 		</ul></nav>
 	</header>

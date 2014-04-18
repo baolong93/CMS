@@ -11,15 +11,20 @@ h1 {
 	float: center;
 	text-transform: uppercase;
 	color: #CF5C3F;
-}	
+}
 
 a {
 	text-decoration: none;
+
+}
+
+#cart {
+	padding: 10px;
+	color: #CF5C3F;
 }
 
 a:link, a:visited {
 	color: #CF5C3F;
-
 
 }
 

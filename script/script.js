@@ -25,6 +25,13 @@ request = function(link, target, result)
     xhr.send(result);
 };
 
+// picPreview = function()
+// {
+// 	var target;
+// 	target = document.getElementById('picPreview');
+// 	request("picPreview.php", target);
+// }
+
 changeCart = function()
 	{
 		var target;
@@ -32,13 +39,21 @@ changeCart = function()
 		request("php/shoppingCart/cart_display.php", target);
 	};
 
+edit = function(link) 
+	{
+		var target;
+		target = document.getElementById("item");
+		request("edit.php?id="+link, target);
+	}
+changeProductView = function(link)
+	{
+		var target;
+		target = document.getElementById("item");
+		request("php/shoppingCart/product_display.php?id="+link, target);
+	}
+
 pageLoaded = function() 
 	{
-		var cart = document.getElementById("add_to_cart");
-		if(cart)
-			{
-				cart.addEventListener("click", changeHomepage);
-			}
 		changeCart();
 	};
 

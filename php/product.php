@@ -1,16 +1,26 @@
 <?php
+	include_once 'connect.php'; //connect to the database
 	include('header.php'); //include header of the page
 ?>
+<div class="maincontent">
+		<div class="content" id="item">
+			<article class="topcontent">
 <?php
-include_once 'connect.php'; //connect to the database
-
-	if (isset($_POST['delete']) && isset($_POST['id'])) //checking product delete.
+	if (isset($_POST['deactive']) && isset($_POST['id'])) //checking product delete.
 	{
 		$id = $_POST['id'];  //getting the id.
-		$query = "DELETE FROM product WHERE ID = '$id'"; 
+		$query = "UPDATE Product SET Active = 0 WHERE ID = '$id'"; 
 		//back for delete the picture file.
-		$delete = $mysqli->query($query);
+		$deactive = $mysqli->query($query);
 		// $deleteImage = unlink($_POST['image']); //delete product image.
+	}
+
+	if (isset($_POST['active']) && isset($_POST['id']))
+	{
+		$id = $_POST['id'];  //getting the id.
+		$query = "UPDATE Product SET Active = 1 WHERE ID = '$id'"; 
+		//back for delete the picture file.
+		$active = $mysqli->query($query);
 	}
 
 
@@ -26,35 +36,45 @@ include_once 'connect.php'; //connect to the database
 	for ($i=0; $i < $rows; $i++) 
 	{ 
 		$row = mysqli_fetch_row($result);
-		echo <<<_END
 
-		<pre>
-		ID:  $row[0]
-		Name:  $row[1]
-		Number of Product:  $row[2]					
-		Price:  $row[3]$
-		Description:  $row[4]
-		Picture: <img src='$row[5]'>   
-		</pre>
+		echo '<pre>';
+		echo 'ID:  '.$row[0].'<br />';
+		echo 'Name:  '.$row[1].'';
+		echo 'Number of Product:  '.$row[2].'<br />';					
+		echo 'Price:  '.$row[3].'<br />';
+		echo 'Description:  '.$row[4].'<br />';
+		echo 'Picture: <img src="'.$row[5].'"><br />'; 
+		echo '</pre>';
+		if ($row[8] == 1)
+		{
+				echo '<form action="product.php" method="post" )">';
+				echo '<input type="hidden" name="deactive" value="yes"/>';
+				echo '<input type="hidden" name="id"    value="'.$row[0].'" />';
+				echo '<input type="hidden" name="image" value="$row[5]" />';
+				echo '<input type="submit" name="deactive" value="DEACTIVE PRODUCT"	/>';
+				echo '</form>';
+		}
+		else 
+		{
+				echo '<form action="product.php" method="post" )">';
+				echo '<input type="hidden" name="active" value="yes"/>';
+				echo '<input type="hidden" name="id"    value="'.$row[0].'" />';
+				echo '<input type="hidden" name="image" value="$row[5]" />';
+				echo '<input type="submit" name="active" value="ACTIVE PRODUCT"	/>';
+				echo '</form>';
+		}
 
-		<form action="product.php" method="post" onSubmit="return confirmDelete()")">
-		<input type="hidden" name="delete" value="yes"/>
-		<input type="hidden" name="id"    value="$row[0]" />
-		<input type="hidden" name="image" value="$row[5]" /> 
-		<input type="submit" name="delete" value="DELETE PRODUCT"	/>
-		</form>
+		echo '<button onclick="edit($row[0])">Edit</button>';
 
-		<form action="edit.php?id=$row[0]" method="post">  
-		<input type="hidden" name="id" value="$row[0]" />
-		<input type="submit" name="edit" value="EDIT PRODUCT" />
-		</form>
-_END;
 	}
 }
 	else {
 		echo "There is no product available in the store.";
 	}
 ?>
+
+</article>
+</div>
 <?php
 	include('footer.php'); //footer of the page
 ?>

@@ -26,24 +26,33 @@ else{
 }
 
 // create  Product table.
-$table = "Product";
-if(mysqli_num_rows($mysqli->query("SHOW TABLES LIKE '".$table."'"))==1) {} //Check existance of the table.
-else {
-$query = "CREATE TABLE Product(ID INT NOT NULL AUTO_INCREMENT,
+$query = "CREATE TABLE IF NOT EXISTS Product(ID INT NOT NULL AUTO_INCREMENT,
           Name VARCHAR(20) NOT NULL,
           Price INT(5) NOT NULL,
           NumberofProduct INT(5) NOT NULL,
           Description VARCHAR(200) NOT NULL,
+          CategoryID INT NOT NULL,
           Picture VARCHAR(50), 
+          AddDate DATE NOT NULL,
           PRIMARY KEY (ID));";
 // Execute query
 if ($mysqli->query($query))
   {
-  echo "Table user created successfully";
+  echo "Table Product created successfully";
   } else
   {
   echo "Error creating table: " . mysqli_error($mysqli);
   }
+
+//create Category table.
+$query = "CREATE TABLE IF NOT EXISTS Category(ID INT NOT NULL AUTO_INCREMENT,
+          Name VARCHAR(20) NOT NULL,
+          PRIMARY KEY (ID));";
+if($mysqli->query($query))
+{
+  echo "Table Category has been create successfully!";
+} else {
+  echo "Error creating Category table:" . mysqli_error($mysqli);
 }
 
 // initialize product.
@@ -57,9 +66,9 @@ $length = mysqli_num_rows($mysqli->query($query));
 if ( $length == 0){
   $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
                         VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
-  if ($mysqli->query($sql))
+  if ($mysqli->query($query))
     {
-      ECHO "CREATE A PRODUCT successfully;";
+      echo "CREATE A Product successfully;";
     }
   else
     {
@@ -77,9 +86,9 @@ $length = mysqli_num_rows($mysqli->query($query));
 if ( $length == 0){
   $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
                         VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
-  if ($mysqli->query($sql))
+  if ($mysqli->query($query))
     {
-      ECHO "CREATE A PRODUCT successfully;";
+      echo "CREATE A PRODUCT successfully;";
     }
   else
     {
@@ -97,9 +106,9 @@ $length = mysqli_num_rows($mysqli->query($query));
 if ( $length == 0){
   $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
                         VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
-  if ($mysqli->query($sql))
+  if ($mysqli->query($query))
     {
-      ECHO "CREATE A PRODUCT successfully;";
+      echo "CREATE A PRODUCT successfully <br>";
     }
   else
     {
@@ -107,6 +116,69 @@ if ( $length == 0){
     }
 }
 
-Echo "All set";
 
+//CREATE CUSTOMER TABLE FOR CHECK-OUT.
+$query = "CREATE TABLE IF NOT EXISTS Customer (
+  ID INT(11) NOT NULL AUTO_INCREMENT,
+  Name VARCHAR(20) NOT NULL,
+  Email VARCHAR(80) NOT NULL,
+  AddressID VARCHAR(80) NOT NULL,
+  Phone VARCHAR(20) NOT NULL,
+  PRIMARY KEY  (ID))"; 
+if ($mysqli->query($query))
+  {
+  echo "Table user created successfully <br>";
+  } else
+  {
+  echo "Error creating table: " . mysqli_error($mysqli);
+  }
+
+//CREATE ADDRESS TABLE FOR CHECKOUT.
+  $query = "CREATE TABLE IF NOT EXISTS Address (
+    ID INT(11) NOT NULL AUTO_INCREMENT, 
+    AddressLine1 VARCHAR(20) NOT NULL,
+    AddressLine2 VARCHAR(20),
+    Town         VARCHAR(20) NOT NULL,
+    County       VARCHAR(20) NOT NULL,
+    PostCode     VARCHAR(7) NOT NULL,
+    Country      VARCHAR(20) NOT NULL,
+    PRIMARY KEY (ID))";
+  if ($mysqli->query($query))
+  {
+  echo "Table Address created successfully <br>";
+  } else
+  {
+  echo "Error creating table: " . mysqli_error($mysqli);
+  }
+
+//CREATE ORDER TABLE FOR CHECKOUT.
+$query = "CREATE TABLE IF NOT EXISTS OrderT ( 
+  ID INT(11) NOT NULL AUTO_INCREMENT,
+  OrderDate DATE NOT NULL,
+  CustomerID INT(11) NOT NULL,
+  PRIMARY KEY  (ID))";
+if ($mysqli->query($query))
+  {
+  echo "Table user created successfully <br>";
+  } else
+  {
+  echo "Error creating table: " . mysqli_error($mysqli);
+  }
+
+//CREATE ORDER-DETAIL FOR CHECKOUT.
+  $query = "CREATE TABLE IF NOT EXISTS Order_Info (
+  ID int(11) NOT NULL AUTO_INCREMENT,
+  Product_ID int(11) NOT NULL,
+  Quantity int(11) NOT NULL,
+  Price Float NOT NULL)";
+if ($mysqli->query($query)){
+  echo "Table Order_Info has been created successfully <br>";
+} else {
+  echo "Error creating table: ".mysqli_error($mysqli);
+}
+
+
+
+
+  echo "ALL SET";
 ?>
