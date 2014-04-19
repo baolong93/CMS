@@ -54,7 +54,7 @@
 		            echo '<div class="product-info">';
 					echo 'Price £'.$prob->Price.' | ';
 		            echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
-					echo '<button class="add_to_cart">Add To Cart</button>';
+					echo '<button class="add_to_cart" id="cartButton">Add To Cart</button>';
 					echo '</div></div>';
 		            echo '<input type="hidden" name="product_ID" value="'.$prob->ID.'" />';
 		            echo '<input type="hidden" name="type" value="add" />';

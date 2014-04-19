@@ -13,13 +13,8 @@ if (isset($_POST['submitted'])) {
 		} //end of nested statement.
 } //end of if statement.
 ?>
-
-<body>
-<h2>Insert New Product</h2>
 		<form method="post" action="addCategory.php" ><pre>    <!--pre tag for keep the form in fix width-->
 			<input type="hidden" name="submitted" value="yes"/>
 			Name:             <input type="text" name="catName"/>
 			<input type="submit" value="Add Category"/>
 	</pre></form>
-
-</body>

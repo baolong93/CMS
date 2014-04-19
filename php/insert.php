@@ -41,8 +41,8 @@ echo 'Name:             <input type="text" name="proName"/><br />';
 echo 'Number of Product:<input type="text" name="NoP" value="1"/><br />';
 echo 'Price:            <input type="text" name="price"/><br />';
 echo 'Description:      <textarea name="desc" cols="50px" rows="5px" wrap="off">Description</textarea><br />';
-echo 'Image:            <input type="file" name="filename" size="10" onComplete="PicPreview()"/><br />';
-echo 'Category:   	  <select name="Category"><br />';
+echo 'Image:            <input type="file" name="filename" size="10"/><br />';
+echo 'Category:   	  <select name="Category">';
 if ($results) 
 { 
 		        //fetch results set as object and output HTML
@@ -53,10 +53,18 @@ if ($results)
     
 }//End if statement.
 echo '</select><br />';
+echo '<div id="addCategory"></div>';
 echo '<input type="submit" value="Add Product"/>';
-echo '</pre></form>';
+echo '</pre></form >';
+// echo '<div id="addCat"><form>';
+// echo '<input type="checkbox" id="mycheck">Add more category<br />';
+// echo '</form></div>';
 
-echo '<div id="PicPreview"></div>';
+// echo '<form method="post" onsubmit=""><pre>';
+// echo '<input type="hidden" name="submitted" value="yes"/>';
+// echo 'Name:             <input type="text" name="catName"/>';
+// echo '<input type="submit" value="Add Category"/>';
+// echo '</pre></form>';
 ?>
 
 <?php 
