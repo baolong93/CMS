@@ -167,9 +167,10 @@ if ($mysqli->query($query))
 
 //CREATE ORDER-DETAIL FOR CHECKOUT.
   $query = "CREATE TABLE IF NOT EXISTS Order_Info (
-  ID int(11) NOT NULL AUTO_INCREMENT,
-  Product_ID int(11) NOT NULL,
-  Quantity int(11) NOT NULL,
+  ID INT(11) NOT NULL AUTO_INCREMENT,
+  OrderID INT(11) NOT NULL,
+  ProductID INT(11) NOT NULL,
+  Quantity INT(11) NOT NULL,
   Price Float NOT NULL)";
 if ($mysqli->query($query)){
   echo "Table Order_Info has been created successfully <br>";

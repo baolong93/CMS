@@ -27,14 +27,40 @@
 		//PUT DATA TO THE DATABASE FOR CUSTOMER TABLE.
 		$query = "INSERT INTO Customer (ID, Name, Email, AddressID, Phone) 
 				  VALUES ('', '$name', '$email', '$addressID', '$phone')";
-		$mysqli->query($query);
+		$result = $mysqli->query($query);
 		if (!$result) {
 			echo "something went wrong!!".mysqli_error($mysqli)."<br>";
 		}
 		$customerID = $mysqli->insert_id;//get the customer id.
 
-		//
+		//PUT DATA TO THE DATABASE FOR ORDERT TABLE.
+		$orderDate = date("Y-m-d H:i:s");
+		$query = "INSERT INTO OrderT (ID, OrderDate, CustomerID) 
+				  VALUES ('', '$orderDate', '$customerID')";
+		$mysqli->query($query);
+		if (!$result) {
+			echo "something went wrong!!".mysqli_error($mysqli)."<br>";
+		}
+		$orderID = $mysqli->insert_id;
 
+		//PUT DATA TO THE DATABASE FOR ORDER_INFO TABLE.
+		foreach ($_SESSION["products"] as $item)
+        {
+           $product_code = $item["code"];
+		   $quantity = $item['qty'];
+		   $subtotal = ($item["price"]*$item["qty"]);
+		   $query = "INSERT INTO ORDER_INFO (ID, OrderID, Product_ID, Quantity, Price)
+		   			 VALUES ('', '$orderID','$product_code',  '$quantity', '$subtotal')";
+		   $mysqli->query($query);
+			if (!$result) {
+				echo "something went wrong!!".mysqli_error($mysqli)."<br>";
+			}
+			$results = $mysqli->query("SELECT NumberofProduct FROM Product WHERE ID='$product_code' LIMIT 1");
+			$obj = $results->fetch_object();
+			$stock = $obj->NumberofProduct - $quantity;
+			$results = $mysqli->query("UPDATE Product SET NumberofProduct = '$stock' WHERE ID = '$product_code'");
+        }
+        session_destroy();
 
 	}
 ?>

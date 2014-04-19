@@ -53,6 +53,7 @@
 		            // echo '<div class="Description">'.$prob->Description.'</div>';
 		            echo '<div class="product-info">';
 					echo 'Price £'.$prob->Price.' | ';
+					echo 'Stock:'.$prob->NumberofProduct.' | ';
 		            echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
 					echo '<button class="add_to_cart" id="cartButton">Add To Cart</button>';
 					echo '</div></div>';

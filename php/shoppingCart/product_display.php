@@ -34,6 +34,7 @@
 		            echo '<div class="Description">'.$items->Description.'</div>';
 		            echo '<div class="product-info">';
 					echo 'Price £'.$items->Price.' | ';
+					echo 'Stock: '.$items->NumberofProduct.' | ';
 		            echo 'Qty <input type="text" id="proQty" name="product_qty" value="1" size="3" />';
 					echo '<button class="add_to_cart" id="addCart" onclick="changeCart()">Add To Cart</button>';
 					echo '</div></div>';
