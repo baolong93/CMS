@@ -1,5 +1,5 @@
 <?php
-	include_once 'connect.php'; //connect to the database
+	include_once '../include/connect.php'; //connect to the database
 	if (isset($_GET['status']) && isset($_GET['id']) && $_GET['status'] == 'active') //Check whether deactive button is pushed.
 	{
 		$id = $_GET['id'];

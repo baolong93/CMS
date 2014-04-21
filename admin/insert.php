@@ -2,34 +2,67 @@
 
 <?php
 /// Need to complete the validation.
-include_once('connect.php');
+/// Need navigation in the coner
+/// Ajax might useful here.
+include_once('../include/connect.php');
 include_once('header.php');
 
 if (isset($_POST['submitted'])) 
 {
+	$productname 			= $_POST['proName'];
+	$numberOfProduct 		= $_POST['NoP'];
+	$price 					= $_POST['price'];
+	$description 			= $_POST['desc'];
+	$catID 					= $_POST['Category'];
+	$date					= date("Y-m-d H:i:s");
+	$sql					="INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, AddDate, Active) 
+								VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$catID', '$date', '1')";
+	$results = $mysqli->query($sql);
+	if (!$results) 
+	{
+		die('error inserting new product!'. mysqli_error($mysqli));
+	} //end of nested statement.
+	$productID = $mysqli->insert_id;
 
 		if ($_FILES) //Picture handling.
 		{
 			$name = $_FILES['filename']['name'];
 			$temp = $_FILES['filename']['tmp_name'];
 			$size = $_FILES['filename']['size'];
-			$image = "picture/".$name;
-			move_uploaded_file($temp, $image);
+			$name = strtolower(ereg_replace("[^A-Za-z0-9]", "", $name)); //Replace all the character other than numberic and string.
+			$image = "picture/".$productID."/".$name;
+			$path = "/picture/" . $productID . "/";// Checking folder exists.
+
+				if (!is_dir($path)) 
+				{
+					    mkdir("picture/" . $productID, 0777);//Create a folder depends on productID.
+				}//End loop for folder checking.
+
+			switch ($_FILES['filename']['type']) {
+				case 'image/jpeg': $extention = "jpg"; break;
+				case 'image/gjf': $extention = "gif"; break;
+				case 'image/png': $extention = 'png'; break;
+				case 'image/tiff': $extention = 'tif'; break;
+				default:		$extention = ''; break;
+			}
+			if ($extention)
+			{
+
+				move_uploaded_file($temp, $image);
+				$query = "UPDATE Product SET Picture = '$image' WHERE ID = '$productID'";
+				$results = $mysqli->query($query);
+
+				if(!$results)
+				{
+					die('error inserting picture'. mysqli_error($mysqli));
+				}
+			}
+			else 
+			{
+				echo "No image has been uploaded, image extention is not valid (jpeg, gjf, png and tiff)!";
+			}
 		}//End if statement.
-	
-		$productname 			= $_POST['proName'];
-		$numberOfProduct 		= $_POST['NoP'];
-		$price 					= $_POST['price'];
-		$description 			= $_POST['desc'];
-		$catID 					= $_POST['Category'];
-		$date					= date("Y-m-d H:i:s");
-		$sql					="INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, Picture, AddDate) 
-								VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$catID', '$image', '$date')";
-		$results = $mysqli->query($sql);
-		if (!$results) 
-		{
-			die('error inserting new product!'. mysqli_error($mysqli));
-		} //end of nested statement.
+	echo "Product has been added succesfully!!";
 } //end of if statement.
 ?>
 
@@ -76,29 +109,43 @@ include ('footer.php');
 	 fail = validateName(form.proName.value)
 	 fail += validatePrice(form.price.value)
 	 fail += validateDescription(form.desc.value)
+	 fail += validateStock(form.NoP.value)
 	 if (fail == "") return true
 	 	else {alert(fail); return false}
 	}
  	</script>
  	<script>
 		function validateName(field) {
-		if (field == "") return "No Name was entered.\n";
-		return ""
+		if (field == "") {
+			return "No Name was entered.\n";
 		}
+		else if (field.length < 8) {
+			return "The product Name must be asleast 8 character.\n";
+		}
+		return "";
+		};
+		function validateStock(field) {
+			if (field == "") {
+				return "Stock at least one. \n";
+			}
+			else if (!/\d/.test(field)) {
+				return "Stock can only be a number."
+			}
+			return "";
+		};
 		function validatePrice(field) {
 			if (field == "") return "No Price was entered.\n"
-			else if (field.length > 5) 
-				return "Price can not be greater than 100000$";
-			else if (![0-9].test(field))
-				return "Invalid Price";
+			else if (!/\d{1,6}/.test(field))
+				return "Price can only be a number and less than million";
 			return "" 
-		}
+		};
 		function validateDescription(field) {
 			if (field == "") return "No description was entered.\n";
-			else if (field.length > 200)
+			else if (field.length > 200){
 				return "description is too long!!.\n";
+			}
 			return ""
-		}
+		};
  </script>
 
 

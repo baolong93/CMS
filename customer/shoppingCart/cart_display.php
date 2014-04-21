@@ -1,7 +1,7 @@
 <?php
-include_once('../connect.php');
+include_once('../../include/connect.php');
 session_start();
-//add item in shopping cart
+//===========================ADD ITEM IN SHOPPING CART==============================
 if(isset($_GET["type"]) && $_GET["type"]=='add')
 {
 	$product_ID 	= filter_var($_GET["product_ID"], FILTER_SANITIZE_NUMBER_INT); //product code
@@ -66,19 +66,20 @@ if(isset($_GET["type"]) && $_GET["type"]=='add')
 	}
 	
 }
-
-			$current_url = $_SESSION["current_url"];
-			if(isset($_SESSION["products"]))
-			{
-			    $total = 0;
-			    foreach ($_SESSION["products"] as $item)
-			    {
-			        $subtotal = $item["qty"];
-			        $total += $subtotal;
-			    }
-			    echo $total;
-			}
-			
-
-
+//===========================RETURN NUMBER OF ITEM IN THE CART==============================
+	$current_url = $_SESSION["current_url"];
+	if(isset($_SESSION["products"]))
+	{
+		$total = 0;
+		foreach ($_SESSION["products"] as $item)
+		{
+		$subtotal = $item["qty"];
+		$total += $subtotal;
+		}
+		echo $total;
+	}
+	else 
+	{
+		echo "0";
+	}
 ?>

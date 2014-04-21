@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once("../connect.php");
+include_once('../../include/connect.php');
+include('../header.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,5 +60,5 @@ include_once("../connect.php");
     ?>
     </div>
 </div>
-</body>
-</html>
+<?php 
+include('../footer.php');

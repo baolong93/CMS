@@ -2,6 +2,7 @@
 include 'connect.php';
 
 //Comeback to initialize some example product.
+//Initialise some data in each table first time user.
 
 
 if (mysqli_connect_errno($mysqli))
@@ -34,6 +35,7 @@ $query = "CREATE TABLE IF NOT EXISTS Product(ID INT NOT NULL AUTO_INCREMENT,
           CategoryID INT NOT NULL,
           Picture VARCHAR(50), 
           AddDate DATE NOT NULL,
+          Active  Boolean NOT NULL,
           PRIMARY KEY (ID));";
 // Execute query
 if ($mysqli->query($query))
@@ -64,8 +66,8 @@ $image = "picture/bag.jpeg";
 $query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
 $length = mysqli_num_rows($mysqli->query($query));
 if ( $length == 0){
-  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
-                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, AddDate, Active) 
+                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', )";
   if ($mysqli->query($query))
     {
       echo "CREATE A Product successfully;";

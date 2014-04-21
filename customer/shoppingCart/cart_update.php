@@ -1,6 +1,6 @@
 	<?php
 session_start();
-include_once("../connect.php");
+include_once('../../include/connect.php');
 
 //If the emptycart is pushed, the session is 
 if(isset($_GET["emptycart"]) && $_GET["emptycart"]==1)

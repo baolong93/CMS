@@ -1,3 +1,8 @@
+@import url("header.css");
+
+
+
+
 body { /*same for every site*/
 	background-color: lightgrey;
 	color: #000305;
@@ -5,6 +10,10 @@ body { /*same for every site*/
 	font-family: Arial, "Lucida Sans Unicode";
 	line-height: 1.5;
 	text-align: left; 
+}
+
+.mainheader {
+	height: 70px;
 }
 
 h1 {
@@ -18,10 +27,7 @@ a {
 
 }
 
-#cart {
-	padding: 10px;
-	color: #CF5C3F;
-}
+
 
 a:link, a:visited {
 	color: #CF5C3F;
@@ -39,7 +45,8 @@ a:hover, a:active {
 	clear: both;
 }
 
-.mainheader nav {
+ nav {
+	width: 100%;
 	background-color: #666;
 	height: 40px;
 	border-radius: 5px;
@@ -47,30 +54,30 @@ a:hover, a:active {
 	-webkit-border-radius: 5px;
 }
 
-.mainheader nav ul {
+ nav ul {
 	list-style: none;   /*get rid of bullet point*/
 	margin: 2% auto;
 }
 
-.mainheader nav ul li {
+ nav ul li {
 	float: left;
 	display: inline;
 }
 
-.mainheader nav a:link, .mainheader nav a:visited {
+ nav a:link,  nav a:visited {
 	color: #fff;
 	display: inline-block;
 	padding: 10px 20px;
 	height: 20px;
 }
 
-.mainheader nav a:hover, .mainheader nav a:active,
-.mainheader nav .active a:link, .mainheader nav .active a:visited {
+ nav a:hover,  nav a:active,
+ nav .active a:link,  nav .active a:visited {
 	background-color: #CF5C3F;
 	text-shadow: none;
 }
 
-.mainheader nav ul li a {
+ nav ul li a {
 	border-radius: 5px;
 }
 
@@ -143,20 +150,20 @@ a:hover, a:active {
 	font-size: 90%;
     } 
 
-    .mainheader nav {
+     nav {
 	height: 120px;
 	}
 
-	.mainheader nav ul {
+	 nav ul {
 		padding-left: 0;
 	}
 
-	.mainheader nav ul li {
+	 nav ul li {
 		width: 100%;
 		text-align: center;
 	}
 
-	.mainheader nav a:link, .mainheader nav a:visited {
+	 nav a:link,  nav a:visited {
 		padding: 10px 20px;
 		height: 20px;
 		display: block;

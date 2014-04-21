@@ -1,6 +1,6 @@
 <?php 
-	include_once("../connect.php");
-	session_start();
+	include_once('../../include/connect.php');
+	session_start();// start the session.
 ?>
 
 <?php
@@ -44,25 +44,26 @@
 		$orderID = $mysqli->insert_id;
 
 		//PUT DATA TO THE DATABASE FOR ORDER_INFO TABLE.
-		foreach ($_SESSION["products"] as $item)
+		foreach ($_SESSION["products"] as $item) //Loop through all the product in the cart.
         {
-           $product_code = $item["code"];
-		   $quantity = $item['qty'];
-		   $subtotal = ($item["price"]*$item["qty"]);
-		   $query = "INSERT INTO ORDER_INFO (ID, OrderID, Product_ID, Quantity, Price)
+            $product_code = $item["code"];
+		    $quantity = $item['qty'];
+		    $subtotal = ($item["price"]*$item["qty"]);
+		    $query = "INSERT INTO ORDER_INFO (ID, OrderID, Product_ID, Quantity, Price)
 		   			 VALUES ('', '$orderID','$product_code',  '$quantity', '$subtotal')";
-		   $mysqli->query($query);
-			if (!$result) {
+		    $mysqli->query($query);
+			if (!$result) 
+			{
 				echo "something went wrong!!".mysqli_error($mysqli)."<br>";
-			}
+			}//End if statement.
 			$results = $mysqli->query("SELECT NumberofProduct FROM Product WHERE ID='$product_code' LIMIT 1");
 			$obj = $results->fetch_object();
-			$stock = $obj->NumberofProduct - $quantity;
+			$stock = $obj->NumberofProduct - $quantity; //Update product's stock.
 			$results = $mysqli->query("UPDATE Product SET NumberofProduct = '$stock' WHERE ID = '$product_code'");
-        }
-        session_destroy();
+        }//End foreach loop.
+        session_destroy();//clear the cart.
 
-	}
+	}//End main if statement.
 ?>
 
 <h2>Customer Information</h2>

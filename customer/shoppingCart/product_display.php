@@ -1,4 +1,4 @@
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +20,7 @@
 
 <?php
 	session_start();
-	include_once("../connect.php");
+	include_once('../../include/connect.php');
 	// $current_url = $_SESSION['current_url'];
 	$current_url = base64_encode($_SERVER['REQUEST_URI']);
 	if (isset($_GET['id'])) {
@@ -29,7 +29,7 @@
 		$items = $result->fetch_object();
 					echo '<div class="items">'; 
 		            // echo '<form method="post" onsubmit="changeCart()">';
-					echo '<div class="proPicture"><img src="php/'.$items->Picture.'"></div>';
+					echo '<div class="proPicture"><img src="admin/'.$items->Picture.'"></div>';
 		            echo '<div class="Name"><h3>'.$items->Name.'</h3>';
 		            echo '<div class="Description">'.$items->Description.'</div>';
 		            echo '<div class="product-info">';
@@ -47,8 +47,8 @@
 
 ?>
 
-<h2>Your Shopping Cart</h2>
-			// <?php
+<!-- <h2>Your Shopping Cart</h2> -->
+			 <?php
 			// if(isset($_SESSION["products"]))
 			// {
 			//     $total = 0;
@@ -72,4 +72,4 @@
 			// }else{
 			//     echo 'Your Cart is empty';
 			// }
-			// ?>
+			 ?>

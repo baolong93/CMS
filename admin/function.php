@@ -1,5 +1,7 @@
+<!-- There is none of this useful-->
+
 <?php
-include('connect.php');
+include('../include/connect.php');
 
 function getProducts() {
 	$query = "SELECT * FROM product";
