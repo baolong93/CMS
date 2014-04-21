@@ -2,7 +2,7 @@
 	include_once '../include/connect.php'; //connect to the database
 ?>
 <h1> Products </h1>
-<table style="width:700px">
+<table style="width:100%">
 <tr>
   <th>ID</th>
   <th>Name</th> 
@@ -10,6 +10,9 @@
   <th>Price</th>
   <th>Description</th>
   <th>Picture</th>
+  <th>State</th>
+  <th>Edit</th>
+  <th>Delete</th>
 </tr>
 <?php
 	$query = "SELECT * FROM product";    //query for getting the product from database.
@@ -24,16 +27,24 @@
 	{ 
 		$row = mysqli_fetch_row($result);
 
-		echo '<pre>';
-		echo 'ID:  '.$row[0].'<br>';
-		echo 'Name:  '.$row[1].'<br>';
-		echo 'Number of Product:  '.$row[3].'<br>';					
-		echo 'Price:  '.$row[2].'<br>';
-		echo 'Description:  '.$row[4].'<br>';
-		echo 'Picture: <img src="'.$row[5].'" width="150px" height="auto"><br>'; 
-		echo '</pre>';
+		echo '<tr>';
+        echo '<td>'.$row[0].'</td>';
+        echo '<td>'.$row[1].'</td>';
+        echo '<td>'.$row[3].'</td>';
+        echo '<td>'.$row[2].'</td>';
+        echo '<td>'.$row[4].'</td>';
+        echo '<td><img src="'.$row[5].'" width="150px" height="auto"></td>';
+		// echo '<pre>';
+		// echo 'ID:  '.$row[0].'<br>';
+		// echo 'Name:  '.$row[1].'<br>';
+		// echo 'Number of Product:  '.$row[3].'<br>';					
+		// echo 'Price:  '.$row[2].'<br>';
+		// echo 'Description:  '.$row[4].'<br>';
+		// echo 'Picture: <img src="'.$row[5].'" width="150px" height="auto"><br>'; 
+		// echo '</pre>';
 		if ($row[8] == 1) //product is actived display Deactive button.
 		{
+				echo '<td>';
 				echo '<div id="active'.$row[0].'">';
 				// echo '<form method="post" id="activeButton">';
 				echo '<input type="hidden" name="status" id="status'.$row[0].'" value="deactive"/>';
@@ -42,9 +53,11 @@
 				echo '<button value="DEACTIVE PRODUCT" onclick="changeActive('.$row[0].')"> Deactive </button>';
 				// echo '</form>';
 				echo '</div>';
+				echo '</td>';
 		} // end if statement.
 		else   //product is deactived display Active button.
-		{
+		{	
+				echo '<td>';
 				echo '<div id="active'.$row[0].'">';
 				// echo '<form method="post" id="activeButton">';
 				echo '<input type="hidden" name="status" id="status'.$row[0].'" value="active"/>';
@@ -53,23 +66,26 @@
 				echo '<button value="active PRODUCT" onclick="changeActive('.$row[0].')"> Active </button>';
 				// echo '</form>';
 				echo '</div>';
+				echo '</td>';
 		} //end else statement
-		
+		echo '<td>';
 		echo '<button onclick="edit('.$row[0].')">Edit</button>'; //Onclick event to trigger ajax link to edit page.
-		echo '<form action="deleteProduct.php" method="post" onsubmit="confirmDelete()">';
+		echo '</td>';
+		echo '<td>';
+		echo '<form action="deleteProduct.php" method="post" onSubmit="return confirmDelete()">';
 		echo '<input name="id" value="'.$row[0].'" type="hidden" />';
 		echo '<input name="image" value="'.$row[5].'" type = "hidden" />';
 		echo '<input type="submit" name="delete" value="Delete Product"/>';
 		echo '</form>';
-
+		echo '</td>';
+		echo '</tr>';
 	}//End for loop.
 	}//End if statement.
-	
 	else 
 	{
 		echo "There is no product available in the store.";
 	}//End Else statement.
-
+echo '</table>';
 
 ?>
 

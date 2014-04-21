@@ -40,7 +40,7 @@ a:hover, a:active {
 /* Start style with all class I have*/
 .body {
 	margin: 0 auto;
-	width: 70%; /*width of body is 70%*/
+	width: 90%; /*width of body is 70%*/
 	clear: both;
 }
 
@@ -101,6 +101,13 @@ a:hover, a:active {
 	padding: 3% 5%;
 	margin-top: 2%;
 	height: auto;
+	overflow: hidden;
+}
+
+.contentAdmin {
+	width: 100%;
+	float: left;  /* giving way for the sidebar*/
+	border-radius: 5px;
 	overflow: hidden;
 }
 
