@@ -1,6 +1,16 @@
 <?php
 	include_once '../include/connect.php'; //connect to the database
 ?>
+<h1> Products </h1>
+<table style="width:700px">
+<tr>
+  <th>ID</th>
+  <th>Name</th> 
+  <th>Stock</th>
+  <th>Price</th>
+  <th>Description</th>
+  <th>Picture</th>
+</tr>
 <?php
 	$query = "SELECT * FROM product";    //query for getting the product from database.
 	$result = $mysqli->query($query); 
@@ -17,10 +27,10 @@
 		echo '<pre>';
 		echo 'ID:  '.$row[0].'<br>';
 		echo 'Name:  '.$row[1].'<br>';
-		echo 'Number of Product:  '.$row[2].'<br>';					
-		echo 'Price:  '.$row[3].'<br>';
+		echo 'Number of Product:  '.$row[3].'<br>';					
+		echo 'Price:  '.$row[2].'<br>';
 		echo 'Description:  '.$row[4].'<br>';
-		echo 'Picture: <img src="'.$row[5].'"><br>'; 
+		echo 'Picture: <img src="'.$row[5].'" width="150px" height="auto"><br>'; 
 		echo '</pre>';
 		if ($row[8] == 1) //product is actived display Deactive button.
 		{

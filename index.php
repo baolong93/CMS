@@ -55,8 +55,8 @@ if(isset($_SESSION["products"]))
 
 	<!-- <div id='cart'></div> -->
 	<div class="maincontent">
-		<div id="item">
-			<article class="topcontent">
+		<div class="content" >
+			<div class="topcontent" id="item">
 			<?php
 		    //query for get product from the database.
 			$results = $mysqli->query("SELECT * FROM Product ORDER BY id ASC");
@@ -69,12 +69,11 @@ if(isset($_SESSION["products"]))
 			        {
 						echo '<div class="product">'; 
 			            echo '<form method="post">';
-						echo '<div class="proPicture><a href="#" onclick ="changeProductView('. $prob->ID. ')"><img src="admin/'.$prob->Picture.'"></a></div>';
-			            echo '<div class="Name"><h3>'.$prob->Name.'</h3>';
-			            echo '<div class="product-info">';
+						echo '<div class="proPicture"><a href="#" onclick ="changeProductView('. $prob->ID. ')"><img src="admin/'.$prob->Picture.'" height="auto" width="100px"></a></div>';
+			            echo '<div class="Name"><h3>'.$prob->Name.'</h3></div>';
+			            echo '<div class="product-info"></div>';
 						echo 'Price £'.$prob->Price.' | ';
 						echo 'Stock:'.$prob->NumberofProduct;
-						echo '</div></div>';
 			            echo '</form>';
 			            echo '</div>';
 			        }
@@ -82,14 +81,12 @@ if(isset($_SESSION["products"]))
 		    }
 		    ?>
 
-			</article>
+			</div>
 		</div>
 
 
 	<aside class="top_sidebar">
-		<article>
 		<h2>Category</h2>
-		</article>
 	</aside>
 </div>
 
@@ -97,6 +94,7 @@ if(isset($_SESSION["products"]))
 
 	<footer class="main_footer">
 		<p>Copyright &copy: <a href="#" title="Bao Long Ngo">Ngo Bao Long</a></p>
+		<a href="admin/index.php" class="linkadmin">Admin page</a>
 	</footer>
 
 </body>

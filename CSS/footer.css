@@ -1,0 +1,21 @@
+.main_footer {
+	width: 100%;
+	float: left;
+	border-radius: 5px;
+	background-color: #666;
+	margin-top: 2%;
+}
+
+.main_footer p {
+	width: 80%;
+	padding-left: 5px;
+	margin: 2% auto;
+	color: #fff;
+	float: left;
+}
+.main_footer .linkadmin {
+	width: 15%;
+	float: right;
+	padding: 17px ;
+}
+

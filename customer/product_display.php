@@ -15,9 +15,6 @@
 </body>
 <html>
 
-
-
-
 <?php
 	session_start();
 	include_once('../../include/connect.php');
@@ -28,7 +25,6 @@
 		$result = $mysqli->query($query);
 		$items = $result->fetch_object();
 					echo '<div class="items">'; 
-		            // echo '<form method="post" onsubmit="changeCart()">';
 					echo '<div class="proPicture"><img src="admin/'.$items->Picture.'"></div>';
 		            echo '<div class="Name"><h3>'.$items->Name.'</h3>';
 		            echo '<div class="Description">'.$items->Description.'</div>';
@@ -41,8 +37,7 @@
 		            echo '<input type="hidden" id = "product_ID" name="product_ID" value="'.$items->ID.'" />';
 		            echo '<input type="hidden" name="type" value="add" />';
 					echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
-		            // echo '</form>';
 		            echo '</div>';
-	} //end the if statement.
+	}
 
 ?>

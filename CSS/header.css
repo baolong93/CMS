@@ -21,3 +21,43 @@
 	float:right;
 	padding:30px 0;
 }
+
+#displaySearchAdmin {
+	width: 25%;
+	float:center;
+	padding:0;
+}
+
+.little-nav li {
+	display: inline;
+}
+
+@media only screen and (min-width: 150px) and (max-width: 600px)
+{
+	#logo {
+	width : 75%;
+	margin: 0;
+	}
+	#cartWrapper {
+		width: 15%;
+		height: 43px;
+		padding:10px;
+	}
+	#cart {
+		width:15%;
+	}
+
+	#displaySearch {
+		width: 100%;
+		padding: 0;
+	}
+
+	#displaySearchAdmin {
+		width: 25%;
+		float:center;
+		padding:0;
+	}
+
+
+
+}

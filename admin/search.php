@@ -6,8 +6,8 @@ include_once('../include/connect.php');
 
 
 <?php
-	if(isset($_POST['search'])){
-		$searchC = $_POST['search'];
+	if(isset($_GET['search'])){
+		$searchC = $_GET['search'];
 		$searchC = preg_replace("[^A-Za-z0-9]", "", $searchC);
 		$query="SELECT * FROM Product WHERE Name LIKE '%$searchC%'";
 		$result = $mysqli->query($query);

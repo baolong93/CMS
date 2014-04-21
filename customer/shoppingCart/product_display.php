@@ -15,9 +15,6 @@
 </body>
 <html>
 
-
-
-
 <?php
 	session_start();
 	include_once('../../include/connect.php');
@@ -29,7 +26,7 @@
 		$items = $result->fetch_object();
 					echo '<div class="items">'; 
 		            // echo '<form method="post" onsubmit="changeCart()">';
-					echo '<div class="proPicture"><img src="admin/'.$items->Picture.'"></div>';
+					echo '<div class="proPicture"><img src="admin/'.$items->Picture.'" height="200px" width="auto"></div>';
 		            echo '<div class="Name"><h3>'.$items->Name.'</h3>';
 		            echo '<div class="Description">'.$items->Description.'</div>';
 		            echo '<div class="product-info">';

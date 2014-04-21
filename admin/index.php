@@ -9,8 +9,8 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<meta name="viewpoint" content="width=device-width initial-scale=1.0" /> <!-- Responsive site. -->
-	<script src="../script/script.js">
-</script>
+	<script src="../script/script.js"></script>
+	<script src="../script/validation.js"></script>
 </head>
 
 <body class="body">
@@ -22,31 +22,30 @@
 		<nav><ul>
 				<li><a href="index.php" class="active" id="homeButton">Dashboard</a></li>
 				<li><a href="insert.php" id="insert">Insert Product</a></li>
-				<li><a href="#" id ="addcat">Insert Category</a></li>
-				<li><a href="#" id="Report">Report</a></li>
+				<li><a href="addCategory.php" id ="addcat">Insert Category</a></li>
+				<li><a href="#" id="Report" onclick="changeReport()">Report</a></li>
+				
 		</ul></nav>
 	
-	<div id="displaySearch">
-			<form action="search.php" method='post' name="searchbox">
-				<input type="text" name="search" value placeholder="Search" />
-				<input type="submit" name="Submit" value="Search"/>
-			</form>
-		</div>
-	<!-- <div id='cart'></div> -->
 	<div class="maincontent">
-		<div class="content" id="item">
-			<article class="topcontent">
+
+		<div class="content">
+			<div class="topcontent" id="item">
 			<script src="../script/productScript.js"></script>
 			<?php 
-			include ('product.php');
+			include ('product.php'); //Include product file for output list of product.
 			?>
-			</article>
+			</div>
 		</div>
 
 
 	<aside class="top_sidebar">
-		<article>
-		</article>
+		<div id="displaySearchAdmin">
+			<form method='post' name="searchbox">
+				<input type="text" name="search" id="search" value placeholder="Search" onkeydown="searchProductAdmin()" />
+				<input type="submit" name="Submit" value="Search"/>
+			</form>
+			</div>
 	</aside>
 </div>
 
@@ -54,6 +53,7 @@
 
 	<footer class="main_footer">
 		<p>Copyright &copy: <a href="#" title="Bao Long Ngo">Ngo Bao Long</a></p>
+		<a href="../index.php" class="linkadmin">Shop page</a>
 	</footer>
 
 </body>

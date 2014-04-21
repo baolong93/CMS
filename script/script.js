@@ -23,7 +23,7 @@ request = function(link, target	)
     xhr.open("GET", link, true);
     xhr.onreadystatechange = changeListener;
     xhr.send();
-};
+}
 changeCart = function()
 	{
 		var target;
@@ -41,18 +41,36 @@ searchProduct = function()
 	request("customer/search.php?search="+search, target);
 }
 
+searchProductAdmin = function()
+{
+	var target; 
+	var search = document.getElementById('search').value;
+	target = document.getElementById('item');
+	request("search.php?search="+search, target);
+}
 changeProductView = function(link)
 	{
 		var target;
 		target = document.getElementById("item");
 		request("customer/shoppingCart/product_display.php?id="+link, target);
 	}
+changeReport = function()
+{
+	var target;
+	target = document.getElementById("item");
+	request("report/orderreport.php", target);
+}
 
 pageLoaded = function() {
 		var searchButton = document.getElementById("searchButton");
+		var reportButton = document.getElementById("Report");
 		if(searchButton)
 		{
 			searchButton.addEventListener("click", searchProduct, true);
+		}
+		if(reportButton)
+		{
+			reportButton.addEventListener("click", changeReport, true);
 		}
 	};
 

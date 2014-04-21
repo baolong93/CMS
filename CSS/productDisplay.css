@@ -1,0 +1,12 @@
+
+.product {
+	margin: 10px 10px 10px 10px ;
+	width:180px;
+	height: 180px;
+	background: #F0F0F0;
+	padding: 10px;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	box-shadow: 2px 2px 2px #F8F8F8;
+	float:left;
+}

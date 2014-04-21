@@ -13,28 +13,23 @@
 		else
 		{
 		        //fetch results set as object and output HTML
+				echo '<div class="topcontent">';
 		        while($prob = $result->fetch_object() )
 		        {
 		        	if ( $prob->Active == 1)  //check acti
 			        {
 						echo '<div class="product">'; 
-			            echo '<form method="post" action="php/shoppingCart/cart_update.php">';
-						echo '<div class="proPicture><a href="#" onclick ="changeProductView('. $prob->ID. ')"><img src="admin/'.$prob->Picture.'"></a></div>';
-			            echo '<div class="Name"><h3>'.$prob->Name.'</h3>';
-			            // echo '<div class="Description">'.$prob->Description.'</div>';
-			            echo '<div class="product-info">';
+			            echo '<form method="post">';
+						echo '<div class="proPicture"><a href="#" onclick ="changeProductView('. $prob->ID. ')"><img src="admin/'.$prob->Picture.'" height="auto" width="100px"></a></div>';
+			            echo '<div class="Name"><h3>'.$prob->Name.'</h3></div>';
+			            echo '<div class="product-info"></div>';
 						echo 'Price £'.$prob->Price.' | ';
 						echo 'Stock:'.$prob->NumberofProduct;
-			            // echo 'Qty <input type="text" name="product_qty" value="1" size="3" />';
-						// echo '<button class="add_to_cart" id="cartButton">Add To Cart</button>';
-						echo '</div></div>';
-			            echo '<input type="hidden" name="product_ID" value="'.$prob->ID.'" />';
-			            echo '<input type="hidden" name="type" value="add" />';
-						// echo '<input type="hidden" name="return_url" value="'.$current_url.'" />';
 			            echo '</form>';
 			            echo '</div>';
 			        }
 		        }
+		        echo '</div>';
     
 		    }
 		}	

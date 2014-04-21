@@ -6,7 +6,22 @@
 /// Ajax might useful here.
 include_once('../include/connect.php');
 include_once('header.php');
-
+?>
+<div class="maincontent">
+		<div class="content">
+			<div>
+			<ul class="little-nav">
+				<li>
+					<a href="index.php">Home</a>
+					<span class="divider">/</span>
+				</li>
+				<li>
+					<a href="insert.php">Insert</a>
+				</li>
+			</ul>
+			</div>
+			<div class="topcontent" id="item">
+<?php
 if (isset($_POST['submitted'])) 
 {
 	$productname 			= $_POST['proName'];
