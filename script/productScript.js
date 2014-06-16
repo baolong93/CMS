@@ -39,3 +39,5 @@ edit = function(link)
 		target = document.getElementById("item");
 		request("edit.php?id="+link, target);
 	}
+
+

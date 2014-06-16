@@ -11,6 +11,7 @@ include_once('../include/connect.php');
   <th>Stock</th>
   <th>Price</th>
   <th>Description</th>
+  <th>Category</th>
   <th>Picture</th>
   <th>State</th>
   <th>Edit</th>
@@ -21,7 +22,7 @@ include_once('../include/connect.php');
 	if(isset($_GET['search'])){
 		$searchC = $_GET['search'];
 		$searchC = preg_replace("[^A-Za-z0-9]", "", $searchC);
-		$query="SELECT * FROM Product WHERE Name LIKE '%$searchC%'";
+		$query="SELECT * FROM Product WHERE Name LIKE '%$searchC%' || Description LIKE '%$searchC%'";
 		$result = $mysqli->query($query);
 		$searchCount = $result->num_rows;
 		if ($searchCount == 0) {
@@ -38,17 +39,17 @@ include_once('../include/connect.php');
 		        echo '<td>'.$row[3].'</td>';
 		        echo '<td>'.$row[2].'</td>';
 		        echo '<td>'.$row[4].'</td>';
-		        echo '<td><img src="'.$row[5].'" width="150px" height="auto"></td>';
+		        $query = "SELECT Name FROM Category WHERE ID = '$row[5]'";
+		        $catname = $mysqli->query($query);
+		        $cat = mysqli_fetch_row($catname);
+		        echo '<td>'.$cat[0].'</td>';
+		        echo '<td><img src="'.$row[6].'" width="150px" height="auto"></td>';
 				if ($row[8] == 1) //product is actived display Deactive button.
 				{	
 						echo '<td>';
 						echo '<div id="active'.$row[0].'">';
-						// echo '<form method="post" id="activeButton">';
 						echo '<input type="hidden" name="status" id="status'.$row[0].'" value="deactive"/>';
-						// echo '<input type="hidden" name="id"  id="id"  value="'.$row[0].'" />';
-						// echo '<input type="hidden" name="image" value="$row[5]" />';
 						echo '<button value="DEACTIVE PRODUCT" onclick="changeActive('.$row[0].')"> Deactive </button>';
-						// echo '</form>';
 						echo '</div>';
 						echo '</td>';
 				} // end if statement.
@@ -56,12 +57,8 @@ include_once('../include/connect.php');
 				{	
 						echo '<td>';
 						echo '<div id="active'.$row[0].'">';
-						// echo '<form method="post" id="activeButton">';
 						echo '<input type="hidden" name="status" id="status'.$row[0].'" value="active"/>';
-						// echo '<input type="hidden" name="id" id="id"   value="'.$row[0].'" />';
-						// echo '<input type="hidden" name="image" value="$row[5]" />';
 						echo '<button value="active PRODUCT" onclick="changeActive('.$row[0].')"> Active </button>';
-						// echo '</form>';
 						echo '</div>';
 						echo '</td>';
 				} //end else statement

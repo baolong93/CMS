@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once('../../include/connect.php');
-include('../header.php');
+include_once('../include/connect.php');
+include('header.php');
 ?>
 <script src="../../script/script.js"></script>
  <h1>Your Cart</h1>
@@ -28,7 +28,7 @@ include('../header.php');
 		echo '<tr>';
         echo '<td><a href="removeItem.php?removeProduct='.$product_ID.'">&times;</a></td>';
         echo '<td>'.$obj->Name.'</td>';
-        echo '<td><img src=../../admin/'.$obj->Picture.' height="150px" width="auto"></td>';
+        echo '<td><img src=../admin/'.$obj->Picture.' height="150px" width="auto"></td>';
         echo '<td>'.$obj->Description.'</td>';
         echo '<td>'.$obj->Price.'</td>';
         echo '<td>'.$item["qty"].'</td>';
@@ -41,13 +41,13 @@ include('../header.php');
    //          echo '<div>'.$obj->Description.'</div>';
 			// echo '</div>';
    //          echo '</li>';
-			$subtotal = ($item["price"]*$item["qty"]);
+			$subtotal = ($obj->Price*$item["qty"]);
 			$total = ($total + $subtotal);
 		echo '<td>'.$currency.$total.'</td>';
 		echo '</tr>';
         }
     	// echo '</ul>';
-		echo '<span class="check-out" id="checkout"><a href="#">Checkout</a></span>';
+		echo '<span class="check-out" id="checkout"><a href="checkout.php">Checkout</a></span>';
 		echo '<span class="empty-cart"><a href="removeItem.php?emptycart=yes">Empty Cart</a></span>';
 		echo '<strong>Total : '.$currency.$total.'</strong>  ';
 		// echo '</span>';
@@ -59,5 +59,5 @@ include('../header.php');
 	echo '</table>';
     ?>
 <?php 
-include('../footer.php');
+include('footer.php');
 ?>

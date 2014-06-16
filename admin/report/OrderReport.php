@@ -1,5 +1,4 @@
 
-
 <h1> Order Report </h1>
 <table style="width:700px">
 <tr>
@@ -11,6 +10,7 @@
 </tr>
 <?php
 include_once('../../include/connect.php');
+$TotalCash = 0;
 $query = "SELECT * FROM OrderT";
 $orders = $mysqli->query($query);
 if ($orders) {  
@@ -28,19 +28,21 @@ if ($orders) {
               $query="SELECT Name FROM Product WHERE ID = '$orderDetail->ProductID'";
               $result = $mysqli->query($query);
               $product = $result->fetch_object();
-              $description .= $product->Name.$orderDetail->Quantity.",";
+              $description .= $product->Name.": ".$orderDetail->Quantity.", ";
             }
           }//End if statement.
         $orderDate = $order->OrderDate;
         echo '<tr>';
         echo '<td>'.$order->ID.'</td>';
-        echo '<td>'.$customer->Name.'</td>';
+        echo '<td><a href=addressReport.php?id='.$customer->AddressID.'>'.$customer->Name.'</a></td>';
         echo '<td>'.$description.'</td>';
         echo '<td>'.$orderDate.'</td>';
         echo '<td>'.$totalPrice.'</td>';
         echo '</tr>';
+        $TotalCash += $totalPrice;
        }
 }
+echo "Total Income: ".$TotalCash;
 ?>
 </table>
 
@@ -52,7 +54,6 @@ if ($orders) {
   <th>Product Quantity</th>
 </tr>
 <?php
-include_once('../../include/connect.php');
 $query = "SELECT * FROM Product";
 $products = $mysqli->query($query);
 if ($products) {  

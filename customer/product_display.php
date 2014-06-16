@@ -1,23 +1,7 @@
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<title>CMS</title>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<meta name="viewpoint" content="width=device-width initial-scale=1.0" /> <!-- Responsive site. -->
-	<script src="script/script.js">
-</script>
-</head>
-
-<body class="body">
-</body>
-<html>
-
 <?php
 	session_start();
-	include_once('../../include/connect.php');
+	include_once('../include/connect.php');
 	// $current_url = $_SESSION['current_url'];
 	$current_url = base64_encode($_SERVER['REQUEST_URI']);
 	if (isset($_GET['id'])) {
@@ -25,7 +9,7 @@
 		$result = $mysqli->query($query);
 		$items = $result->fetch_object();
 					echo '<div class="items">'; 
-					echo '<div class="proPicture"><img src="admin/'.$items->Picture.'"></div>';
+					echo '<div class="proPicture"><img src="admin/'.$items->Picture.'" height="150px" width="auto"></div>';
 		            echo '<div class="Name"><h3>'.$items->Name.'</h3>';
 		            echo '<div class="Description">'.$items->Description.'</div>';
 		            echo '<div class="product-info">';

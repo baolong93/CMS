@@ -24,13 +24,23 @@ request = function(link, target	)
     xhr.onreadystatechange = changeListener;
     xhr.send();
 }
+removeProduct =function(ProID)
+{
+	var target = document.getElementById('removeProduct');
+	request("removeItem.php?removeProduct="+ProID, target);
+}
+emptyCart = function() 
+{
+	var target = document.getElementById('removeProduct');
+	request("removeItem.php?emptycart=true", target);
+}
 changeCart = function()
 	{
 		var target;
 		var proQty = document.getElementById('proQty').value;
 		var productID = document.getElementById('product_ID').value;
 		target = document.getElementById("cart");
-		request("customer/shoppingcart/cart_display.php?product_ID="+productID+"&product_qty="+proQty+"&type=add", target);
+		request("customer/cart_display.php?product_ID="+productID+"&product_qty="+proQty+"&type=add", target);
 	};
 
 searchProduct = function()
@@ -52,7 +62,7 @@ changeProductView = function(link)
 	{
 		var target;
 		target = document.getElementById("item");
-		request("customer/shoppingCart/product_display.php?id="+link, target);
+		request("customer/product_display.php?id="+link, target);
 	}
 changeReport = function()
 {
@@ -64,6 +74,7 @@ changeReport = function()
 pageLoaded = function() {
 		var searchButton = document.getElementById("searchButton");
 		var reportButton = document.getElementById("Report");
+		var checkoutButton = document.getElementById("checkout");
 		if(searchButton)
 		{
 			searchButton.addEventListener("click", searchProduct, true);
@@ -71,6 +82,10 @@ pageLoaded = function() {
 		if(reportButton)
 		{
 			reportButton.addEventListener("click", changeReport, true);
+		}
+		if(checkoutButton)
+		{
+			checkoutButton.addEventListener("click", checkOut, true);
 		}
 	};
 

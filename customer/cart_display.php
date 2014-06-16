@@ -1,11 +1,11 @@
 <?php
-include_once('../../include/connect.php');
+include_once('../include/connect.php');
 session_start();
 //===========================ADD ITEM IN SHOPPING CART==============================
 if(isset($_GET["type"]) && $_GET["type"]=='add')
 {
-	$product_ID 	= filter_var($_GET["product_ID"], FILTER_SANITIZE_NUMBER_INT); //product code
-	$product_qty 	= filter_var($_GET["product_qty"], FILTER_SANITIZE_NUMBER_INT); //product code
+	$product_ID 	= $_GET["product_ID"]; //product code
+	$product_qty 	= $_GET["product_qty"]; //product code
 	// $return_url 	= base64_decode($_POST["return_url"]); //return url
 
 	//MySqli query - get details of item from db using product code
@@ -14,14 +14,14 @@ if(isset($_GET["type"]) && $_GET["type"]=='add')
 
 	if($product_qty > $obj->NumberofProduct)
 	{ //Checking whether the stock is available for order.
-		die('<div align="center">The quantity is surpass the stock!<br /><a href="../../index.php">Back To Homepage</a>.</div>');
+		die;
 	}
 	
 	if ($results) 
 	{ //we have the product info 
 		
 	//prepare array for the session variable
-	$new_product = array(array('name'=>$obj->Name, 'code'=>$product_ID, 'qty'=>$product_qty, 'price'=>$obj->Price));
+	$new_product = array(array('name'=>$obj->Name, 'ID'=>$product_ID, 'qty'=>$product_qty, 'price'=>$obj->Price));
 		
 		if(isset($_SESSION["products"])) //if we have the session
 		{
@@ -29,20 +29,20 @@ if(isset($_GET["type"]) && $_GET["type"]=='add')
 			
 			foreach ($_SESSION["products"] as $item) //Check every single item in the cart.
 			{
-				if($item["code"] == $product_ID)
+				if($item["ID"] == $product_ID)
 				{ 
        				$product_qty += $item['qty']; //increase number of product in the cart
        				if ($product_qty > $obj->NumberofProduct) 
        				{
-       					die('<div align="center">The quantity is surpass the stock!<br /><a href="../../index.php">Back To Homepage</a>.</div>');
+       					die;
        				} //Again to check the order compare to what the company hv in stock.
-					$product[] = array('name'=>$item["name"], 'code'=>$item["code"], 'qty'=>$product_qty, 'price'=>$item["price"]);
+					$product[] = array('name'=>$item["name"], 'ID'=>$item["ID"], 'qty'=>$product_qty, 'price'=>$item["price"]);
 					$found = true;
 				}
 				else
 				{
 					//item doesn't exist in the list, just retrive old info and prepare array for session var
-					$product[] = array('name'=>$item["name"], 'code'=>$item["code"], 'qty'=>$item["qty"], 'price'=>$item["price"]);
+					$product[] = array('name'=>$item["name"], 'ID'=>$item["ID"], 'qty'=>$item["qty"], 'price'=>$item["price"]);
 				}
 			}
 			
@@ -67,7 +67,6 @@ if(isset($_GET["type"]) && $_GET["type"]=='add')
 	
 }
 //===========================RETURN NUMBER OF ITEM IN THE CART==============================
-	$current_url = $_SESSION["current_url"];
 	if(isset($_SESSION["products"]))
 	{
 		$total = 0;

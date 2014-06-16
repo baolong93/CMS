@@ -1,7 +1,62 @@
 <?php 
-	include_once('../../include/connect.php');
+	include_once('../include/connect.php');
 	session_start();// start the session.
+	include("header.php");
 ?>
+<script>
+function validate(form) {
+	 fail = validateName(form.Name.value)
+	 fail += validateEmail(form.email.value)
+	 fail += validateAddress(form.AddressLine1.value)
+	 fail += validateAddress(form.AddressLine2.value)
+	 fail += validateAddress(form.town.value)
+	 fail += validateAddress(form.county.value)
+	 fail += validateAddress(form.postcode.value)
+	 if (fail == "") return true
+	 	else {alert(fail); return false}
+	};
+		function validateName(field) {
+		if (field == "") {
+			return "No Name was entered.\n";
+		}
+		else if (field.length < 8) {
+			return "The product Name must be asleast 8 character.\n";
+		}
+		else if (/[^a-zA-Z]/.test(field)) {
+			return "Name can only be a string."
+		}
+		return "";
+		};
+		function validateEmail(field) {
+			if (field == "") {
+			return "No Email was entered.\n";
+		}
+		else if (!((field.indexOf(".")>0) && (field.indexOf("@")>0)) || /[^a-zA-Z0-9.@_-]/.test(field))
+		{
+			return "the Email address is invalid."
+		}
+		return "";
+		};
+		function validatePhone(field) {
+			if (field == "") {
+				return "Phone number at least one. \n";
+			}
+			else if (!/\d/.test(field)) {
+				return "Phone number can only be a number."
+			}
+			else if (field.length != 11){
+				return "invalid"
+			}
+			return "";
+		};
+		function validateAddress(field) {
+			if (field == "") return "No Address was entered.\n";
+			else if (!/[^a-zA-Z0-9]/.test(field)){
+				return "invalid address!.\n";
+			}
+			return ""
+		};
+</script>
 
 <?php
 	if(isset($_POST['submitted'])){
@@ -46,20 +101,20 @@
 		//PUT DATA TO THE DATABASE FOR ORDER_INFO TABLE.
 		foreach ($_SESSION["products"] as $item) //Loop through all the product in the cart.
         {
-            $product_code = $item["code"];
+            $product_ID = $item["ID"];
 		    $quantity = $item['qty'];
 		    $subtotal = ($item["price"]*$item["qty"]);
 		    $query = "INSERT INTO ORDER_INFO (ID, OrderID, Product_ID, Quantity, Price)
-		   			 VALUES ('', '$orderID','$product_code',  '$quantity', '$subtotal')";
+		   			 VALUES ('', '$orderID','$product_ID',  '$quantity', '$subtotal')";
 		    $mysqli->query($query);
 			if (!$result) 
 			{
 				echo "something went wrong!!".mysqli_error($mysqli)."<br>";
 			}//End if statement.
-			$results = $mysqli->query("SELECT NumberofProduct FROM Product WHERE ID='$product_code' LIMIT 1");
+			$results = $mysqli->query("SELECT NumberofProduct FROM Product WHERE ID='$product_ID' LIMIT 1");
 			$obj = $results->fetch_object();
 			$stock = $obj->NumberofProduct - $quantity; //Update product's stock.
-			$results = $mysqli->query("UPDATE Product SET NumberofProduct = '$stock' WHERE ID = '$product_code'");
+			$results = $mysqli->query("UPDATE Product SET NumberofProduct = '$stock' WHERE ID = '$product_ID'");
         }//End foreach loop.
         session_destroy();//clear the cart.
 
@@ -67,7 +122,7 @@
 ?>
 
 <h2>Customer Information</h2>
-		<form method="post" action="checkout.php" ><pre>    <!--pre tag for keep the form in fix width-->
+		<form method="post" action="checkout.php" onSubmit="return validate(this)"><pre>    <!--pre tag for keep the form in fix width-->
 			<input type="hidden" name="submitted" value="yes"/>
 			Name:             <input type="text" name="Name"/>
 			Email Address:<input type="text" name="email" />
@@ -85,7 +140,7 @@
 			<input type="submit" value="Check out"/>
 	</pre></form>
 
-
-
-
+<?php
+	include("footer.php");
+?>
 

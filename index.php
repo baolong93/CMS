@@ -32,10 +32,10 @@ if(isset($_SESSION["products"]))
 <body class="body">
 	<!-- ==================== Header ============================-->
 	<header class="mainheader">
-		<h1 id="logo">Bao Long Shop</h1>
+		<h1 id="logo">EasyCart</h1>
 		<!-- ==================== Shopping cart display ============================-->
 		<div id="cartWrapper">
-			<a href="customer/shoppingCart/view_cart.php">Cart </a>
+			<a href="customer/view_cart.php">Cart </a>
 				<div id='cart'><?php echo $total; ?></div>
 		</div>
 		<!-- ==================== Search box ============================-->
@@ -87,6 +87,18 @@ if(isset($_SESSION["products"]))
 
 	<aside class="top_sidebar">
 		<h2>Category</h2>
+		<?php 
+			$query = 'SELECT * FROM Category';
+			$result = $mysqli->query($query);
+			echo '<ul>';
+			if ($result) {
+				while($cat = $result->fetch_object())
+				{
+					echo '<li>'.$cat->Name.'</li>';
+				}
+			}
+			echo '</ul>';
+		?>
 	</aside>
 </div>
 

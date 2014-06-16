@@ -26,7 +26,21 @@ else{
   	}
 }
 
-// create  Product table.
+//===========================CREATE CATEGORY TABLE===========================
+$query = "CREATE TABLE IF NOT EXISTS Category(ID INT NOT NULL AUTO_INCREMENT,
+          Name VARCHAR(20) NOT NULL,
+          PRIMARY KEY (ID));";
+if($mysqli->query($query))
+{
+  echo "Table Category has been create successfully!";
+} else {
+  echo "Error creating Category table:" . mysqli_error($mysqli);
+}
+
+$cat1 = $mysqli->query("INSERT INTO Category VALUES ('', 'Laptop')");
+$cat2 = $mysqli->query("INSERT INTO Category VALUES ('', 'Stationery')");
+
+//===========================CREATE PRODUCT TABLE===========================
 $query = "CREATE TABLE IF NOT EXISTS Product(ID INT NOT NULL AUTO_INCREMENT,
           Name VARCHAR(20) NOT NULL,
           Price INT(5) NOT NULL,
@@ -46,28 +60,15 @@ if ($mysqli->query($query))
   echo "Error creating table: " . mysqli_error($mysqli);
   }
 
-//create Category table.
-$query = "CREATE TABLE IF NOT EXISTS Category(ID INT NOT NULL AUTO_INCREMENT,
-          Name VARCHAR(20) NOT NULL,
-          PRIMARY KEY (ID));";
-if($mysqli->query($query))
-{
-  echo "Table Category has been create successfully!";
-} else {
-  echo "Error creating Category table:" . mysqli_error($mysqli);
-}
+
 
 // initialize product.
-$productname = "Bag";
 $description = "Endeavor bachelor but add eat pleasure doubtful sociable. Earnest greater on no observe for";
-$price = "15";
-$numberOfProduct = "14";
-$image = "picture/bag.jpeg";
-$query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
-$length = mysqli_num_rows($mysqli->query($query));
-if ( $length == 0){
-  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, AddDate, Active) 
-                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', )";
+$image = "picture/1/bag.jpeg";
+$date = date("Y-m-d H:i:s");
+
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, AddDate, Active, Picture) 
+                        VALUES ('', 'Bag', '15', '15', '$description', '2', '$date', '1', '$image' )";
   if ($mysqli->query($query))
     {
       echo "CREATE A Product successfully;";
@@ -76,18 +77,11 @@ if ( $length == 0){
     {
       echo "Something went wrong!";
     }
-}
 
-$productname = "MacBook";
-$description = "Endeavor bachelor but add eat pleasure doubtful sociable. Earnest greater on no observe for";
-$price = "15";
-$numberOfProduct = "14";
-$image = "picture/macbook.jpeg";
-$query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
-$length = mysqli_num_rows($mysqli->query($query));
-if ( $length == 0){
-  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
-                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+$image = "picture/2/macbook.jpeg";
+
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, AddDate, Active, Picture) 
+                        VALUES ('', 'Macbook', '15', '1000', '$description', '1', '$date', '1', '$image' )";
   if ($mysqli->query($query))
     {
       echo "CREATE A PRODUCT successfully;";
@@ -96,18 +90,13 @@ if ( $length == 0){
     {
       echo "Something went wrong!";
     }
-}
 
-$productname = "noimage";
+
 $description = "Endeavor bachelor but add eat pleasure doubtful sociable. Earnest greater on no observe for";
-$price = "15";
-$numberOfProduct = "14";
-$image = "picture/noimage.jpeg";
-$query = "SELECT ID FROM Product WHERE Name = '$productname' LIMIT 1";
-$length = mysqli_num_rows($mysqli->query($query));
-if ( $length == 0){
-  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, Picture) 
-                        VALUES ('', '$productname', '$numberOfProduct', '$price', '$description', '$image')";
+$image = "picture/3/pen.jpg";
+
+  $query = "INSERT INTO Product (ID, Name, NumberofProduct, Price, Description, CategoryID, AddDate, Active, Picture) 
+                        VALUES ('', 'pen', '15', '5', '$description', '2', '$date', '1', '$image' )";
   if ($mysqli->query($query))
     {
       echo "CREATE A PRODUCT successfully <br>";
@@ -116,10 +105,10 @@ if ( $length == 0){
     {
       echo "Something went wrong!";
     }
-}
 
 
-//CREATE CUSTOMER TABLE FOR CHECK-OUT.
+
+//===========================CREATE CUSTOMER TABLE===========================
 $query = "CREATE TABLE IF NOT EXISTS Customer (
   ID INT(11) NOT NULL AUTO_INCREMENT,
   Name VARCHAR(20) NOT NULL,
@@ -135,7 +124,9 @@ if ($mysqli->query($query))
   echo "Error creating table: " . mysqli_error($mysqli);
   }
 
-//CREATE ADDRESS TABLE FOR CHECKOUT.
+  $customer1 = $mysqli->query("INSERT INTO Customer VALUES ('', 'Bao Long Ngo', 'rongvangufa@gmail.com', '0', '07554786673')");
+
+//===========================CREATE ADDRESS TABLE===========================
   $query = "CREATE TABLE IF NOT EXISTS Address (
     ID INT(11) NOT NULL AUTO_INCREMENT, 
     AddressLine1 VARCHAR(20) NOT NULL,
@@ -152,8 +143,9 @@ if ($mysqli->query($query))
   {
   echo "Error creating table: " . mysqli_error($mysqli);
   }
+$address1 = $mysqli->query("INSERT INTO Address VALUES ('', '82 Kings road', '', 'Southsea', 'Hampshire', 'PO5 4DN', 'UK')");
 
-//CREATE ORDER TABLE FOR CHECKOUT.
+//===========================CREATE ORDERT TABLE===========================
 $query = "CREATE TABLE IF NOT EXISTS OrderT ( 
   ID INT(11) NOT NULL AUTO_INCREMENT,
   OrderDate DATE NOT NULL,
@@ -167,20 +159,24 @@ if ($mysqli->query($query))
   echo "Error creating table: " . mysqli_error($mysqli);
   }
 
-//CREATE ORDER-DETAIL FOR CHECKOUT.
+  $Ordert1 = $mysqli->query("INSERT INTO OrderT VALUES ('', '$date', '1')");
+
+//===========================CREATE ORDER-DETAIL TABLE===========================
   $query = "CREATE TABLE IF NOT EXISTS Order_Info (
   ID INT(11) NOT NULL AUTO_INCREMENT,
   OrderID INT(11) NOT NULL,
   ProductID INT(11) NOT NULL,
   Quantity INT(11) NOT NULL,
-  Price Float NOT NULL)";
+  Price Float NOT NULL,
+  PRIMARY KEY (ID))";
 if ($mysqli->query($query)){
   echo "Table Order_Info has been created successfully <br>";
 } else {
   echo "Error creating table: ".mysqli_error($mysqli);
 }
 
-
+$orderinfor1 = $mysqli->query("INSERT INTO Order_Info VALUES ('', '1', '1', '4', '60')");
+$orderinfor2 = $mysqli->query("INSERT INTO Order_Info VALUES ('', '1', '2', '1', '1000' )");
 
 
   echo "ALL SET";

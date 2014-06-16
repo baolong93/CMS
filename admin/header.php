@@ -29,7 +29,7 @@
 				<li><a href="index.php" class="active" id="homeButton">Dashboard</a></li>
 				<li><a href="insert.php" id="insert">Insert Product</a></li>
 				<li><a href="addCategory.php" id ="addcat">Insert Category</a></li>
-				<li><a href="report/orderReport.php" id="Report">Report</a></li>
+				<li><a href="#" id="Report" onclick="changeReport()">Report</a></li>
 		</ul></nav>
 	
 	

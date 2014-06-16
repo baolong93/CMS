@@ -9,6 +9,7 @@
   <th>Stock</th>
   <th>Price</th>
   <th>Description</th>
+  <th>Category</th>
   <th>Picture</th>
   <th>State</th>
   <th>Edit</th>
@@ -33,25 +34,17 @@
         echo '<td>'.$row[3].'</td>';
         echo '<td>'.$row[2].'</td>';
         echo '<td>'.$row[4].'</td>';
-        echo '<td><img src="'.$row[5].'" width="150px" height="auto"></td>';
-		// echo '<pre>';
-		// echo 'ID:  '.$row[0].'<br>';
-		// echo 'Name:  '.$row[1].'<br>';
-		// echo 'Number of Product:  '.$row[3].'<br>';					
-		// echo 'Price:  '.$row[2].'<br>';
-		// echo 'Description:  '.$row[4].'<br>';
-		// echo 'Picture: <img src="'.$row[5].'" width="150px" height="auto"><br>'; 
-		// echo '</pre>';
+        $query = "SELECT Name FROM Category WHERE ID = '$row[5]'";
+        $catname = $mysqli->query($query);
+        $cat = mysqli_fetch_row($catname);
+        echo '<td>'.$cat[0].'</td>';
+        echo '<td><img src="'.$row[6].'" width="150px" height="auto"></td>';
 		if ($row[8] == 1) //product is actived display Deactive button.
 		{
 				echo '<td>';
 				echo '<div id="active'.$row[0].'">';
-				// echo '<form method="post" id="activeButton">';
 				echo '<input type="hidden" name="status" id="status'.$row[0].'" value="deactive"/>';
-				// echo '<input type="hidden" name="id"  id="id"  value="'.$row[0].'" />';
-				// echo '<input type="hidden" name="image" value="$row[5]" />';
 				echo '<button value="DEACTIVE PRODUCT" onclick="changeActive('.$row[0].')"> Deactive </button>';
-				// echo '</form>';
 				echo '</div>';
 				echo '</td>';
 		} // end if statement.
@@ -59,12 +52,8 @@
 		{	
 				echo '<td>';
 				echo '<div id="active'.$row[0].'">';
-				// echo '<form method="post" id="activeButton">';
 				echo '<input type="hidden" name="status" id="status'.$row[0].'" value="active"/>';
-				// echo '<input type="hidden" name="id" id="id"   value="'.$row[0].'" />';
-				// echo '<input type="hidden" name="image" value="$row[5]" />';
 				echo '<button value="active PRODUCT" onclick="changeActive('.$row[0].')"> Active </button>';
-				// echo '</form>';
 				echo '</div>';
 				echo '</td>';
 		} //end else statement
