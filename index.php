@@ -29,6 +29,7 @@ if(isset($_SESSION["products"]))
 </script>
 </head>
 
+<<<<<<< HEAD
 <body class="body">
 	<!-- ==================== Header ============================-->
 	<header class="mainheader">
@@ -83,6 +84,19 @@ if(isset($_SESSION["products"]))
 
 			</div>
 		</div>
+=======
+<body>
+	<h1> Insert form</h1>
+		<form method="post" action="index.php"><pre>    <!--pre tag for keep the form in fix width-->
+			<input type="hidden" name="submitted" value="yes"/>
+			Name:               <input type="text" name="name"/>
+			Number of Product:  <input type="text" name="NoP" value="1"/>
+			Price:              <input type="text" name="price"/>
+			Description:        <textarea name="description" cols="50px" rows="5px" wrap="off">Description
+								</textarea>
+			<input type="submit" value="Add Product"/>
+		</pre></form>
+>>>>>>> FETCH_HEAD
 
 
 	<aside class="top_sidebar">
